@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Glad2Glow | Creator Application</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+      :root {
+        --ink: #2a1f1c;
+        --soft-ink: #5a4a44;
+        --muted: #9b8b84;
+        --rose: #d98d97;
+        --rose-deep: #c2667a;
+        --rose-darker: #a84f62;
+        --rose-light: #fdf2f3;
+        --rose-border: #f1d8db;
+        --gold: #c9a87c;
+        --gold-deep: #b8956a;
+        --line: #eee6e2;
+        --line-soft: #f5eeea;
+        --white: #ffffff;
+        --cream: #fcf8f6;
+        --green: #2e5c3e;
+        --green-soft: #e9f0e9;
+        --amber: #b07d2a;
+        --amber-soft: #fdf6e8;
+        --amber-border: #eeddb8;
+        --display: "Playfair Display", serif;
+        --body: "DM Sans", sans-serif;
+        --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        --safe-top: env(safe-area-inset-top, 0px);
+        --safe-bottom: env(safe-area-inset-bottom, 0px);
+        --safe-left: env(safe-area-inset-left, 0px);
+        --safe-right: env(safe-area-inset-right, 0px);
+        --ease: cubic-bezier(.16, 1, .3, 1);
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        overflow-x: hidden;
+        background: var(--white);
+        color: var(--ink);
+        font-family: var(--body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-tap-highlight-color: transparent;
+        font-feature-settings: "ss01", "cv01";
+      }
+
+      img, video {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* ==================== MAIN APPLICATION ==================== */
+
+      .page {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        position: relative;
+      }
+
+      /* ==================== SIDE BRAND ==================== */
+
+      .side-brand {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 70px;
+        overflow: hidden;
+        background: var(--cream);
+      }
+
+      .side-brand::before {
+        content: "";
+        position: absolute;
+        width: 720px;
+        height: 720px;
+        border: 1px solid rgba(217, 141, 151, 0.13);
+        border-radius: 50%;
+        transform: translate(-22%, 16%);
+        animation: floatSlow 14s ease-in-out infinite;
+      }
+
+      .side-brand::after {
+        content: "";
+        position: absolute;
+        width: 480px;
+        height: 480px;
+        border: 1px solid rgba(201, 168, 124, 0.13);
+        border-radius: 50%;
+        transform: translate(52%, -42%);
+        animation: floatSlowAlt 18s ease-in-out infinite;
+      }
+
+      .orbit {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .orbit-1 {
+        width: 340px;
+        height: 340px;
+        border: 1px dashed rgba(217, 141, 151, 0.18);
+        top: 12%;
+        left: -80px;
+        animation: spinSlow 60s linear infinite;
+      }
+
+      .orbit-2 {
+        width: 240px;
+        height: 240px;
+        border: 1px dashed rgba(201, 168, 124, 0.2);
+        bottom: 10%;
+        right: -60px;
+        animation: spinSlow 45s linear infinite reverse;
+      }
+
+      .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        pointer-events: none;
+      }
+
+      .glow-orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(217, 141, 151, 0.18), transparent 70%);
+        top: -120px;
+        right: -120px;
+        animation: breathe 8s ease-in-out infinite;
+      }
+
+      .glow-orb-2 {
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, rgba(201, 168, 124, 0.14), transparent 70%);
+        bottom: -100px;
+        left: -80px;
+        animation: breathe 10s ease-in-out infinite reverse;
+      }
+
+      @keyframes floatSlow {
+        0%, 100% { transform: translate(-22%, 16%) scale(1); }
+        50% { transform: translate(-20%, 18%) scale(1.03); }
+      }
+
+      @keyframes floatSlowAlt {
+        0%, 100% { transform: translate(52%, -42%) scale(1); }
+        50% { transform: translate(54%, -40%) scale(1.03); }
+      }
+
+      @keyframes spinSlow {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes breathe {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.08); opacity: 1; }
+      }
+
+      .brand-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 510px;
+      }
+
+      .brand-logo {
+        margin-bottom: 60px;
+        animation: fadeSlide 0.7s ease-out 0.1s both;
+      }
+
+      .brand-logo img {
+        width: auto;
+        max-width: 280px;
+        max-height: 80px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 12px rgba(48, 37, 34, 0.06));
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        padding: 6px 14px 6px 10px;
+        color: var(--rose-deep);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        background: rgba(253, 242, 243, 0.7);
+        border: 1px solid var(--rose-border);
+        border-radius: 999px;
+        animation: fadeSlide 0.7s ease-out 0.2s both;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--rose-deep);
+        box-shadow: 0 0 0 3px rgba(217, 141, 151, 0.2);
+      }
+
+      .brand-content h1 {
+        max-width: 470px;
+        font-family: var(--display);
+        font-size: clamp(38px, 5vw, 68px);
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: -0.045em;
+        color: var(--ink);
+        animation: fadeSlide 0.7s ease-out 0.3s both;
+      }
+
+      .brand-content h1 em {
+        color: var(--rose-deep);
+        font-weight: 500;
+        font-style: italic;
+        position: relative;
+      }
+
+      .brand-content h1 em::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.06em;
+        height: 3px;
+        background: linear-gradient(90deg, var(--rose), var(--gold));
+        border-radius: 3px;
+        opacity: 0.4;
+      }
+
+      .brand-description {
+        max-width: 420px;
+        margin-top: 24px;
+        color: var(--soft-ink);
+        font-size: 14px;
+        line-height: 1.8;
+        animation: fadeSlide 0.7s ease-out 0.4s both;
+      }
+
+      .brand-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 36px;
+        padding: 10px 16px;
+        color: var(--soft-ink);
+        font-size: 11px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        animation: fadeSlide 0.7s ease-out 0.5s both;
+      }
+
+      .brand-note i {
+        color: var(--gold-deep);
+        font-size: 13px;
+      }
+
+      @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ==================== PROCESSING PANEL ==================== */
+
+      .processing {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 70px;
+        background: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .processing::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        right: -120px;
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(217, 141, 151, 0.07), transparent 70%);
+        pointer-events: none;
+        animation: breathe 12s ease-in-out infinite;
+      }
+
+      .processing::after {
+        content: "";
+        position: absolute;
+        bottom: -160px;
+        left: -120px;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(201, 168, 124, 0.06), transparent 70%);
+        pointer-events: none;
+        animation: breathe 14s ease-in-out infinite reverse;
+      }
+
+      .processing-inner {
+        width: 100%;
+        max-width: 480px;
+        animation: fadeSlide 0.8s ease-out 0.3s both;
+        position: relative;
+        z-index: 1;
+      }
+
+      .status-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 28px;
+        padding: 6px 14px 6px 12px;
+        color: var(--soft-ink);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: #faf7f5;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--rose);
+        box-shadow: 0 0 0 0 rgba(217, 141, 151, 0.5);
+        animation: pulse 1.8s ease-out infinite;
+      }
+
+      @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(217, 141, 151, 0.5); }
+        70% { box-shadow: 0 0 0 10px rgba(217, 141, 151, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(217, 141, 151, 0); }
+      }
+
+      .processing h2 {
+        margin-bottom: 15px;
+        font-family: var(--display);
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 600;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+      }
+
+      .intro {
+        max-width: 430px;
+        color: var(--soft-ink);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .progress-block {
+        margin-top: 48px;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 12px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .progress-header span:first-child {
+        color: var(--soft-ink);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .progress-header .stage-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--rose-deep);
+        box-shadow: 0 0 0 0 rgba(217, 141, 151, 0.5);
+        animation: pulse 1.8s ease-out infinite;
+        flex-shrink: 0;
+      }
+
+      .percentage {
+        color: var(--rose-deep);
+        font-variant-numeric: tabular-nums;
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 7px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #f1e9e5;
+        position: relative;
+        box-shadow: inset 0 1px 2px rgba(48, 37, 34, 0.04);
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--rose), #e7a0a8, var(--gold));
+        transition: width 0.5s cubic-bezier(.16, 1, .3, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 12px rgba(217, 141, 151, 0.4);
+      }
+
+      .progress-fill::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        animation: barShine 1.6s linear infinite;
+      }
+
+      @keyframes barShine {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
+      }
+
+      .progress-text {
+        min-height: 20px;
+        margin-top: 13px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .progress-text .caption-spinner {
+        width: 11px;
+        height: 11px;
+        border: 1.5px solid #e8ddd8;
+        border-top-color: var(--rose-deep);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        flex-shrink: 0;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ==================== LIVE SESSION TICKER ==================== */
+
+      .session-ticker {
+        margin-top: 16px;
+        padding: 11px 14px;
+        background: linear-gradient(135deg, #faf7f5, #fdfaf8);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 10px;
+        font-family: var(--mono);
+        letter-spacing: 0.03em;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .session-ticker::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--rose), var(--gold));
+        opacity: 0.7;
+      }
+
+      .session-ticker-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: var(--body);
+        font-size: 9px;
+        letter-spacing: 0.09em;
+        flex-shrink: 0;
+        padding-left: 4px;
+      }
+
+      .session-ticker-left i {
+        color: var(--rose-deep);
+        font-size: 10px;
+      }
+
+      .session-ticker-right {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--soft-ink);
+        font-weight: 600;
+        min-width: 0;
+      }
+
+      .live-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(46, 92, 62, 0.5);
+        animation: pulse 1.6s ease-out infinite;
+        flex-shrink: 0;
+      }
+
+      .session-id-value {
+        color: var(--ink);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* ==================== STEPS ==================== */
+
+      .steps {
+        margin-top: 28px;
+        border-top: 1px solid var(--line);
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+        color: #aa9b94;
+        font-size: 12px;
+        line-height: 1.6;
+        transition: color 0.4s ease, padding 0.4s ease;
+        position: relative;
+      }
+
+      .step::before {
+        content: "";
+        position: absolute;
+        left: -22px;
+        top: 50%;
+        transform: translateY(-50%) scaleY(0);
+        width: 2px;
+        height: 60%;
+        background: linear-gradient(180deg, var(--rose), var(--gold));
+        border-radius: 2px;
+        transition: transform 0.4s cubic-bezier(.16, 1, .3, 1);
+        opacity: 0.7;
+      }
+
+      .step.active::before {
+        transform: translateY(-50%) scaleY(1);
+      }
+
+      .step-icon {
+        display: grid;
+        flex: 0 0 28px;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #eadfda;
+        border-radius: 50%;
+        color: #b7a8a0;
+        font-size: 10px;
+        transition: all 0.4s cubic-bezier(.16, 1, .3, 1);
+        position: relative;
+      }
+
+      .step.active {
+        color: var(--soft-ink);
+        font-weight: 500;
+      }
+
+      .step.active .step-icon {
+        color: var(--white);
+        border-color: var(--rose-deep);
+        background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+        box-shadow: 0 0 0 5px rgba(217, 141, 151, 0.15);
+        transform: scale(1.06);
+      }
+
+      .step.active .step-icon::after {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: 50%;
+        border: 1px solid rgba(217, 141, 151, 0.4);
+        animation: ping 1.6s ease-out infinite;
+      }
+
+      @keyframes ping {
+        0% { transform: scale(0.9); opacity: 0.8; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+
+      .step.done {
+        color: #75655f;
+      }
+
+      .step.done .step-icon {
+        color: var(--green);
+        border-color: rgba(46, 92, 62, 0.25);
+        background: var(--green-soft);
+      }
+
+      .step.done .step-icon i {
+        animation: checkPop 0.4s cubic-bezier(.16, 1, .3, 1);
+      }
+
+      @keyframes checkPop {
+        0% { transform: scale(0); opacity: 0; }
+        60% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      /* ==================== LIVE ACTIVITY LOG ==================== */
+
+      .activity-log {
+        margin-top: 24px;
+        padding: 14px 15px;
+        background: linear-gradient(135deg, #faf7f5, #fdfaf8);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+        transition: max-height 0.5s var(--ease), opacity 0.5s var(--ease),
+                    padding 0.5s var(--ease);
+      }
+
+      .activity-log.show {
+        max-height: 220px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        opacity: 1;
+      }
+
+      .activity-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+        padding-bottom: 9px;
+        border-bottom: 1px dashed var(--line);
+      }
+
+      .activity-header-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--soft-ink);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .activity-header-left i {
+        color: var(--rose-deep);
+        font-size: 10px;
+      }
+
+      .activity-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--green);
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .activity-live .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulse 1.6s ease-out infinite;
+      }
+
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 150px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+
+      .activity-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        font-size: 10.5px;
+        line-height: 1.5;
+        color: var(--soft-ink);
+        animation: activityIn 0.4s var(--ease) both;
+      }
+
+      @keyframes activityIn {
+        from { opacity: 0; transform: translateX(-8px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      .activity-time {
+        flex-shrink: 0;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 9px;
+        font-weight: 600;
+        padding-top: 1px;
+        min-width: 42px;
+      }
+
+      .activity-text {
+        flex: 1;
+        min-width: 0;
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .activity-text .hl {
+        color: var(--rose-deep);
+        font-weight: 700;
+      }
+
+      .activity-text .hl-green {
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      /* ==================== SECURE NOTE ==================== */
+
+      .secure-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 22px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.7;
+      }
+
+      .secure-note i {
+        margin-top: 2px;
+        color: var(--gold-deep);
+      }
+
+      /* ==================== SUCCESS / REDIRECT STATE ==================== */
+
+      .success-state {
+        display: none;
+      }
+
+      .success-state.show {
+        display: block;
+        animation: fadeSlide 0.7s ease-out;
+      }
+
+      .processing-content.hide {
+        display: none;
+      }
+
+      /* compact verification card */
+      .verify-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px 18px;
+        background: linear-gradient(135deg, var(--amber-soft), #fff);
+        border: 1px solid var(--amber-border);
+        border-radius: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .verify-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--amber), #d9a44a);
+        opacity: 0.85;
+      }
+
+      .verify-icon {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 18px;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--amber), #d9a44a);
+        box-shadow: 0 8px 22px rgba(176, 125, 42, 0.28);
+        position: relative;
+        z-index: 2;
+        animation: popIn 0.5s var(--ease);
+        margin-top: 2px;
+      }
+
+      .verify-icon::after {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 1px solid rgba(176, 125, 42, 0.35);
+        animation: ping 2s ease-out infinite;
+      }
+
+      @keyframes popIn {
+        0% { transform: scale(0); opacity: 0; }
+        60% { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      .verify-body {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .verify-title {
+        font-family: var(--display);
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        line-height: 1.2;
+      }
+
+      .verify-desc {
+        margin-top: 6px;
+        color: var(--soft-ink);
+        font-size: 11.5px;
+        line-height: 1.65;
+      }
+
+      .verify-desc strong {
+        color: var(--amber);
+        font-weight: 700;
+      }
+
+      .verify-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--amber-border);
+        color: var(--amber);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .verify-status i {
+        font-size: 9px;
+        animation: spin 1s linear infinite;
+      }
+
+      /* redirect progress bar */
+      .redirect-bar-wrap {
+        margin-top: 16px;
+      }
+
+      .redirect-bar {
+        width: 100%;
+        height: 3px;
+        border-radius: 999px;
+        background: #f1e9e5;
+        overflow: hidden;
+        box-shadow: inset 0 1px 2px rgba(48, 37, 34, 0.04);
+      }
+
+      .redirect-bar-fill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--amber), #d9a44a);
+        transition: width 0.3s linear;
+      }
+
+      /* ==================== CREATOR PROGRAM ==================== */
+
+      .creator-section {
+        width: 100%;
+        padding: 85px 24px;
+        border-top: 1px solid var(--line);
+        background: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .creator-section::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(217, 141, 151, 0.05), transparent 70%);
+        pointer-events: none;
+      }
+
+      .creator-inner {
+        width: 100%;
+        max-width: 1120px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .creator-heading {
+        max-width: 760px;
+      }
+
+      .creator-kicker {
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 5px 12px;
+        color: var(--rose-deep);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: var(--rose-light);
+        border: 1px solid var(--rose-border);
+        border-radius: 999px;
+      }
+
+      .creator-heading h2 {
+        font-family: var(--display);
+        font-size: clamp(30px, 5vw, 56px);
+        font-weight: 600;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+      }
+
+      .creator-heading p {
+        max-width: 700px;
+        margin-top: 22px;
+        color: var(--soft-ink);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .credibility-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 40px;
+      }
+
+      .credibility-card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--white);
+        transition: transform 0.35s cubic-bezier(.16, 1, .3, 1),
+                    box-shadow 0.35s ease,
+                    border-color 0.35s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .credibility-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--rose), var(--gold));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(.16, 1, .3, 1);
+      }
+
+      .credibility-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .credibility-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--rose-border);
+        box-shadow: 0 18px 40px rgba(44, 31, 27, 0.07);
+      }
+
+      .credibility-card strong {
+        display: block;
+        margin-bottom: 28px;
+        color: var(--rose-deep);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .credibility-card span {
+        display: block;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .credibility-card small {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .creator-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .creator-card {
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--white);
+        transition: transform 0.35s cubic-bezier(.16, 1, .3, 1),
+                    box-shadow 0.35s ease;
+      }
+
+      .creator-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(44, 31, 27, 0.07);
+      }
+
+      .creator-card.dark {
+        color: var(--white);
+        border-color: var(--ink);
+        background: linear-gradient(155deg, #2a1f1c 0%, #3a2c28 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .creator-card.dark::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(217, 141, 151, 0.15), transparent 70%);
+        pointer-events: none;
+      }
+
+      .creator-card.dark:hover {
+        box-shadow: 0 24px 50px rgba(48, 37, 34, 0.3);
+      }
+
+      .card-label {
+        display: block;
+        margin-bottom: 25px;
+        color: var(--rose-deep);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .creator-card.dark .card-label {
+        color: var(--gold);
+      }
+
+      .creator-card h3 {
+        font-family: var(--display);
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+      }
+
+      .creator-card.dark h3 {
+        color: var(--white);
+      }
+
+      .creator-card ul {
+        margin-top: 25px;
+        padding-left: 18px;
+      }
+
+      .creator-card li {
+        margin-bottom: 13px;
+        color: var(--soft-ink);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .creator-card.dark p {
+        margin-top: 22px;
+        color: #d8c9c3;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .checklist {
+        display: grid;
+        gap: 12px;
+        margin-top: 25px;
+        color: #f5d8dc;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .important-note {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 22px;
+        padding: 18px 20px;
+        border-radius: 12px;
+        color: var(--soft-ink);
+        background: linear-gradient(135deg, #fdf2f3, #fdf8f2);
+        border: 1px solid var(--rose-border);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .important-note strong {
+        color: var(--ink);
+      }
+
+      /* ==================== TABLETS ==================== */
+
+      @media (max-width: 1024px) {
+        .page {
+          grid-template-columns: 1fr;
+        }
+
+        .side-brand {
+          min-height: auto;
+          padding: calc(65px + var(--safe-top)) 40px 65px;
+        }
+
+        .side-brand::before {
+          width: 520px;
+          height: 520px;
+        }
+
+        .side-brand::after {
+          width: 380px;
+          height: 380px;
+        }
+
+        .orbit-1 { width: 280px; height: 280px; }
+        .orbit-2 { width: 200px; height: 200px; }
+
+        .brand-content {
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        .brand-content h1 {
+          max-width: 650px;
+          font-size: clamp(40px, 7vw, 62px);
+        }
+
+        .processing {
+          min-height: auto;
+          padding: 65px 40px calc(65px + var(--safe-bottom));
+        }
+
+        .processing-inner {
+          max-width: 650px;
+        }
+
+        .credibility-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .creator-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ==================== MOBILE ==================== */
+
+      @media (max-width: 600px) {
+        .side-brand {
+          padding: calc(40px + var(--safe-top)) 20px 45px;
+        }
+
+        .side-brand::before {
+          width: 380px;
+          height: 380px;
+        }
+
+        .side-brand::after {
+          width: 260px;
+          height: 260px;
+        }
+
+        .orbit-1 { width: 200px; height: 200px; left: -60px; }
+        .orbit-2 { width: 150px; height: 150px; right: -40px; }
+
+        .glow-orb-1 { width: 280px; height: 280px; }
+        .glow-orb-2 { width: 220px; height: 220px; }
+
+        .brand-logo { margin-bottom: 35px; }
+        .brand-logo img { max-width: 200px; max-height: 56px; }
+
+        .eyebrow {
+          margin-bottom: 15px;
+          font-size: 9px;
+          letter-spacing: 0.1em;
+          padding: 5px 12px 5px 9px;
+        }
+
+        .brand-content h1 {
+          max-width: 100%;
+          font-size: clamp(34px, 10vw, 46px);
+          line-height: 1.05;
+        }
+
+        .brand-description {
+          max-width: 100%;
+          margin-top: 20px;
+          font-size: 12.5px;
+          line-height: 1.75;
+        }
+
+        .brand-note {
+          margin-top: 26px;
+          font-size: 10px;
+          padding: 9px 14px;
+        }
+
+        .processing {
+          padding: 42px 20px calc(52px + var(--safe-bottom));
+        }
+
+        .processing-inner { max-width: 100%; }
+
+        .status-label {
+          margin-bottom: 22px;
+          font-size: 9px;
+          padding: 5px 12px 5px 10px;
+        }
+
+        .processing h2 {
+          font-size: clamp(30px, 9vw, 40px);
+        }
+
+        .intro { font-size: 12.5px; }
+
+        .progress-block { margin-top: 35px; }
+        .progress-header { font-size: 10px; }
+        .progress-text { font-size: 11.5px; }
+
+        .session-ticker {
+          padding: 9px 11px;
+          gap: 8px;
+          font-size: 9.5px;
+          margin-top: 14px;
+        }
+
+        .session-ticker-left { font-size: 8.5px; gap: 6px; }
+        .session-id-value { font-size: 9.5px; }
+
+        .steps { margin-top: 24px; }
+
+        .step {
+          align-items: flex-start;
+          gap: 10px;
+          padding: 14px 0;
+          font-size: 11.5px;
+        }
+
+        .step-icon {
+          width: 26px;
+          height: 26px;
+          flex-basis: 26px;
+          font-size: 9.5px;
+        }
+
+        .activity-log { margin-top: 18px; padding: 12px 13px; }
+        .activity-item { font-size: 10px; }
+        .activity-time { min-width: 38px; font-size: 8.5px; }
+        .activity-header-left { font-size: 8.5px; }
+
+        .secure-note {
+          margin-top: 20px;
+          padding-top: 18px;
+          font-size: 10px;
+        }
+
+        .verify-card {
+          padding: 15px 15px;
+          gap: 13px;
+        }
+
+        .verify-icon {
+          flex-basis: 38px;
+          width: 38px;
+          height: 38px;
+          font-size: 15px;
+        }
+
+        .verify-title { font-size: 17px; }
+        .verify-desc { font-size: 11px; }
+        .verify-status { font-size: 8.5px; padding: 3px 8px; }
+
+        .creator-section {
+          padding: 48px 16px calc(48px + var(--safe-bottom));
+        }
+
+        .creator-kicker {
+          font-size: 9px;
+          padding: 4px 10px;
+        }
+
+        .creator-heading h2 {
+          font-size: clamp(28px, 8.5vw, 38px);
+          line-height: 1.1;
+        }
+
+        .creator-heading p {
+          margin-top: 18px;
+          font-size: 12.5px;
+          line-height: 1.75;
+        }
+
+        .credibility-row {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-top: 28px;
+        }
+
+        .credibility-card { padding: 20px; border-radius: 12px; }
+        .credibility-card strong { margin-bottom: 18px; }
+        .credibility-card span { font-size: 13.5px; }
+        .credibility-card small { font-size: 11.5px; }
+
+        .creator-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          margin-top: 14px;
+        }
+
+        .creator-card { padding: 24px 20px; border-radius: 14px; }
+        .card-label { margin-bottom: 20px; font-size: 9px; }
+        .creator-card h3 { font-size: 24px; }
+        .creator-card li { font-size: 11.5px; line-height: 1.7; }
+        .creator-card.dark p { font-size: 11.5px; line-height: 1.75; }
+        .checklist { font-size: 11.5px; }
+
+        .important-note {
+          display: block;
+          padding: 16px;
+          font-size: 11px;
+          line-height: 1.75;
+        }
+      }
+
+      /* ==================== SMALL PHONES ==================== */
+
+      @media (max-width: 420px) {
+        .side-brand {
+          padding: calc(32px + var(--safe-top)) 18px 38px;
+        }
+
+        .brand-logo { margin-bottom: 28px; }
+        .brand-logo img { max-width: 175px; max-height: 50px; }
+
+        .brand-content h1 { font-size: clamp(30px, 10vw, 40px); }
+
+        .processing {
+          padding: 34px 18px calc(44px + var(--safe-bottom));
+        }
+
+        .processing h2 { font-size: clamp(28px, 9vw, 36px); }
+
+        .verify-icon {
+          flex-basis: 34px;
+          width: 34px;
+          height: 34px;
+          font-size: 13px;
+        }
+
+        .verify-title { font-size: 16px; }
+        .verify-desc { font-size: 10.5px; }
+
+        .creator-section {
+          padding: 40px 14px calc(40px + var(--safe-bottom));
+        }
+
+        .creator-card { padding: 22px 18px; }
+        .creator-card h3 { font-size: 22px; }
+      }
+
+      @media (max-width: 360px) {
+        .side-brand {
+          padding: calc(28px + var(--safe-top)) 16px 34px;
+        }
+
+        .processing {
+          padding: 30px 16px calc(38px + var(--safe-bottom));
+        }
+
+        .brand-content h1 { font-size: 30px; }
+        .processing h2 { font-size: 28px; }
+
+        .creator-section {
+          padding: 34px 12px calc(34px + var(--safe-bottom));
+        }
+
+        .creator-card { padding: 18px 14px; }
+        .creator-card h3 { font-size: 21px; }
+
+        .step { font-size: 11px; }
+        .step-icon { width: 24px; height: 24px; flex-basis: 24px; font-size: 9px; }
+      }
+
+      @media (max-height: 500px) and (orientation: landscape) {
+        .side-brand { padding: 30px 40px; }
+        .processing { padding: 30px 40px; }
+
+        .brand-logo { margin-bottom: 22px; }
+        .brand-logo img { max-width: 170px; max-height: 44px; }
+        .brand-content h1 { font-size: 34px; }
+        .brand-description { margin-top: 12px; font-size: 12px; }
+        .brand-note { margin-top: 16px; }
+        .progress-block { margin-top: 24px; }
+        .steps { margin-top: 18px; }
+        .step { padding: 10px 0; }
+        .secure-note { margin-top: 18px; padding-top: 14px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Custom scrollbar for activity log */
+      .activity-list::-webkit-scrollbar { width: 4px; }
+      .activity-list::-webkit-scrollbar-track { background: transparent; }
+      .activity-list::-webkit-scrollbar-thumb {
+        background: var(--line); border-radius: 4px;
+      }
+      .activity-list::-webkit-scrollbar-thumb:hover { background: var(--rose-border); }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- APPLICATION SECTION -->
+
+    <main class="page">
+
+      <section class="side-brand">
+
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+
+        <div class="brand-content">
+
+          <div class="brand-logo">
+            <img src="12.png" alt="Glad2Glow Logo">
+          </div>
+
+          <div class="eyebrow">
+            Creator Application
+          </div>
+
+          <h1>
+            Your application is being
+            <em>prepared.</em>
+          </h1>
+
+          <p class="brand-description">
+            We're organizing your creator details and preparing the next
+            step of your application. Please keep this page open while
+            the process is completed.
+          </p>
+
+          <div class="brand-note">
+            <i class="fa-solid fa-shield-heart"></i>
+            Secure creator application process
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="processing">
+
+        <div class="processing-inner">
+
+          <div class="processing-content" id="processingContent">
+
+            <div class="status-label">
+              <span class="status-dot"></span>
+              Processing Application
+            </div>
+
+            <h2>
+              Finalizing your details.
+            </h2>
+
+            <p class="intro">
+              We're completing a few final checks before continuing
+              you to the verification stage.
+            </p>
+
+            <div class="progress-block">
+
+              <div class="progress-header">
+                <span id="progressStage">
+                  <span class="stage-dot"></span>
+                  Preparing application
+                </span>
+
+                <span class="percentage" id="percentage">
+                  0%
+                </span>
+              </div>
+
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+              </div>
+
+              <div class="progress-text">
+                <span class="caption-spinner"></span>
+                <span id="progressText">Preparing your application...</span>
+              </div>
+
+            </div>
+
+            <!-- Live session ticker -->
+            <div class="session-ticker">
+              <span class="session-ticker-left">
+                <i class="fa-solid fa-fingerprint"></i> Session
+              </span>
+              <span class="session-ticker-right">
+                <span class="live-dot"></span>
+                <span class="session-id-value" id="sessionId">····-····-····</span>
+              </span>
+            </div>
+
+            <div class="steps">
+
+              <div class="step active" id="step1">
+                <span class="step-icon">
+                  <i class="fa-solid fa-file-lines"></i>
+                </span>
+
+                <span>
+                  Preparing your application details
+                </span>
+              </div>
+
+              <div class="step" id="step2">
+                <span class="step-icon">
+                  <i class="fa-solid fa-user-check"></i>
+                </span>
+
+                <span>
+                  Reviewing submitted information
+                </span>
+              </div>
+
+              <div class="step" id="step3">
+                <span class="step-icon">
+                  <i class="fa-solid fa-key"></i>
+                </span>
+
+                <span>
+                  Preparing your verification step
+                </span>
+              </div>
+
+            </div>
+
+            <!-- Live Activity Log -->
+            <div class="activity-log" id="activityLog">
+              <div class="activity-header">
+                <span class="activity-header-left">
+                  <i class="fa-solid fa-wave-square"></i>
+                  Live Activity
+                </span>
+                <span class="activity-live">
+                  <span class="dot"></span>
+                  Live
+                </span>
+              </div>
+              <div class="activity-list" id="activityList"></div>
+            </div>
+
+            <div class="secure-note">
+              <i class="fa-solid fa-lock"></i>
+
+              <span>
+                Your reference number will be provided during verification
+                and is required to continue your creator application.
+              </span>
+            </div>
+
+          </div>
+
+          <!-- COMPACT SUCCESS / REDIRECT STATE -->
+
+          <div class="success-state" id="successState">
+
+            <div class="verify-card">
+
+              <div class="verify-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+
+              <div class="verify-body">
+
+                <div class="verify-title">
+                  Continue to verification
+                </div>
+
+                <div class="verify-desc">
+                  Your application is <strong>not verified yet</strong>. You will be
+                  redirected to the verification process to complete your creator
+                  status. Please take a moment to read this notice before continuing.
+                </div>
+
+                <span class="verify-status" id="verifyStatus">
+                  <i class="fa-solid fa-circle-notch"></i>
+                  <span id="verifyStatusText">Reading verification notice...</span>
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="redirect-bar-wrap">
+              <div class="redirect-bar">
+                <div class="redirect-bar-fill" id="redirectBarFill"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- CREATOR PROGRAM SECTION -->
+
+    <section class="creator-section">
+
+      <div class="creator-inner">
+
+        <div class="creator-heading">
+
+          <span class="creator-kicker">
+            GLAD2GLOW CREATOR COMMUNITY
+          </span>
+
+          <h2>
+            Turn your everyday content into meaningful brand opportunities.
+          </h2>
+
+          <p>
+            Join a creator community built around authentic storytelling,
+            thoughtful product experiences, and long-term collaboration.
+            Whether you are starting out or already building an audience,
+            your perspective matters.
+          </p>
+
+        </div>
+
+        <div class="credibility-row">
+
+          <div class="credibility-card">
+            <strong>01</strong>
+            <span>Simple application</span>
+            <small>
+              Share your details in a few clear steps.
+            </small>
+          </div>
+
+          <div class="credibility-card">
+            <strong>02</strong>
+            <span>Human review</span>
+            <small>
+              Applications are reviewed based on the information provided.
+            </small>
+          </div>
+
+          <div class="credibility-card">
+            <strong>03</strong>
+            <span>Authentic content</span>
+            <small>
+              Create in your own voice and personal style.
+            </small>
+          </div>
+
+          <div class="credibility-card">
+            <strong>04</strong>
+            <span>Future potential</span>
+            <small>
+              Eligible creators may be considered for future campaigns.
+            </small>
+          </div>
+
+        </div>
+
+        <div class="creator-grid">
+
+          <article class="creator-card">
+
+            <span class="card-label">
+              WHAT YOU CAN EXPECT
+            </span>
+
+            <h3>
+              Clear communication, creative freedom, and a professional experience.
+            </h3>
+
+            <ul>
+              <li>
+                Campaign information presented in a clear and organized way.
+              </li>
+
+              <li>
+                Room to create content that feels natural to your audience.
+              </li>
+
+              <li>
+                Opportunities to build a stronger creator portfolio.
+              </li>
+
+              <li>
+                A structured application process with accurate details.
+              </li>
+            </ul>
+
+          </article>
+
+          <article class="creator-card dark">
+
+            <span class="card-label">
+              BEFORE YOU APPLY
+            </span>
+
+            <h3>
+              Help us understand your creator identity.
+            </h3>
+
+            <p>
+              Make sure your social media details are correct, your profile
+              is accessible, and your answers reflect your real interests
+              and content style.
+            </p>
+
+            <div class="checklist">
+              <span>✓ Active social profile</span>
+              <span>✓ Accurate contact information</span>
+              <span>✓ Genuine interest in the brand</span>
+            </div>
+
+          </article>
+
+        </div>
+
+        <div class="important-note">
+          <strong>Important:</strong>
+
+          <span>
+            Submitting an application does not guarantee selection.
+            Each application is considered individually.
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+      (function() {
+        "use strict";
+
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const percentage = document.getElementById("percentage");
+        const progressStage = document.getElementById("progressStage");
+        const processingContent = document.getElementById("processingContent");
+        const successState = document.getElementById("successState");
+        const sessionIdEl = document.getElementById("sessionId");
+        const redirectBarFill = document.getElementById("redirectBarFill");
+        const verifyStatusText = document.getElementById("verifyStatusText");
+        const activityLog = document.getElementById("activityLog");
+        const activityList = document.getElementById("activityList");
+
+        const VERIFICATION_URL = "verification.html";
+
+        const steps = [
+          {
+            target: 30,
+            stage: "Preparing application",
+            text: "Preparing your application details...",
+            holdMin: 900,
+            holdMax: 1400,
+            activity: "Application details compiled"
+          },
+          {
+            target: 62,
+            stage: "Reviewing details",
+            text: "Reviewing your submitted information...",
+            holdMin: 1400,
+            holdMax: 2200,
+            activity: "Profile review completed"
+          },
+          {
+            target: 88,
+            stage: "Preparing verification",
+            text: "Preparing your verification step...",
+            holdMin: 1400,
+            holdMax: 2100,
+            activity: "Verification handoff prepared"
+          },
+          {
+            target: 100,
+            stage: "Finalizing",
+            text: "Application finalized. Redirecting to verification...",
+            holdMin: 700,
+            holdMax: 1000,
+            activity: "Application finalized — redirect ready"
+          }
+        ];
+
+        let progress = 0;
+        let currentStep = 0;
+        let redirectTimer = null;
+
+        /* ---- Session ID ticker ---- */
+        let sessionTickerInterval = null;
+        let sessionFlickerInterval = null;
+
+        function randomHex(len) {
+          const chars = "0123456789ABCDEF";
+          let out = "";
+          for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * 16)];
+          return out;
+        }
+
+        function generateSessionId() {
+          return randomHex(4) + "-" + randomHex(4) + "-" + randomHex(4);
+        }
+
+        function startSessionTicker() {
+          const finalId = generateSessionId();
+          let displayed = "";
+          let position = 0;
+          const finalChars = finalId.split("");
+          sessionIdEl.textContent = "";
+
+          sessionTickerInterval = setInterval(() => {
+            if (position >= finalChars.length) {
+              clearInterval(sessionTickerInterval);
+              sessionTickerInterval = null;
+
+              sessionFlickerInterval = setInterval(() => {
+                const parts = sessionIdEl.textContent.split("-");
+                if (parts.length === 3) {
+                  parts[2] = randomHex(4);
+                  sessionIdEl.textContent = parts.join("-");
+                }
+              }, 2000);
+
+              return;
+            }
+            displayed += finalChars[position];
+            sessionIdEl.textContent = displayed;
+            position++;
+          }, 50);
+        }
+
+        function stopSessionTicker() {
+          if (sessionTickerInterval) { clearInterval(sessionTickerInterval); sessionTickerInterval = null; }
+          if (sessionFlickerInterval) { clearInterval(sessionFlickerInterval); sessionFlickerInterval = null; }
+        }
+
+        /* ---- Activity Log ---- */
+        function addActivity(text, type) {
+          const now = new Date();
+          const timeStr = String(now.getHours()).padStart(2, "0") + ":" +
+                          String(now.getMinutes()).padStart(2, "0") + ":" +
+                          String(now.getSeconds()).padStart(2, "0");
+
+          const item = document.createElement("div");
+          item.className = "activity-item";
+
+          let displayText = text;
+          if (type === "highlight") {
+            displayText = text.replace(/\[(.+?)\]/, '<span class="hl">$1</span>');
+          } else if (type === "green") {
+            displayText = text.replace(/\[(.+?)\]/, '<span class="hl-green">$1</span>');
+          }
+
+          item.innerHTML = '<span class="activity-time">' + timeStr + '</span>' +
+                          '<span class="activity-text">' + displayText + '</span>';
+          activityList.appendChild(item);
+
+          activityList.scrollTop = activityList.scrollHeight;
+
+          while (activityList.children.length > 6) {
+            activityList.removeChild(activityList.firstChild);
+          }
+        }
+
+        /* ---- Progress ---- */
+
+        function updateStepState(index) {
+          const stepIds = ["step1", "step2", "step3"];
+
+          stepIds.forEach((id, i) => {
+            const step = document.getElementById(id);
+            step.classList.remove("active", "done");
+
+            if (i < index) {
+              step.classList.add("done");
+              step.querySelector(".step-icon").innerHTML =
+                '<i class="fa-solid fa-check"></i>';
+            } else if (i === index) {
+              step.classList.add("active");
+            }
+          });
+        }
+
+        function animateBar(from, to, duration, onDone) {
+          const start = performance.now();
+          function frame(now) {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const value = from + (to - from) * eased;
+            progressBar.style.width = value + "%";
+            percentage.textContent = Math.round(value) + "%";
+            if (t < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              progressBar.style.width = to + "%";
+              percentage.textContent = Math.round(to) + "%";
+              if (onDone) onDone();
+            }
+          }
+          requestAnimationFrame(frame);
+        }
+
+        function runStage() {
+          const current = steps[currentStep];
+          const startProgress = progress;
+          const target = current.target;
+          const duration = 1100 + Math.random() * 700;
+
+          progressStage.innerHTML = '<span class="stage-dot"></span>' + current.stage;
+          progressText.textContent = current.text;
+
+          addActivity(current.activity, "highlight");
+
+          if (currentStep === 0) {
+            activityLog.classList.add("show");
+          }
+
+          if (currentStep < 3) {
+            updateStepState(currentStep);
+          }
+
+          animateBar(startProgress, target, duration, () => {
+            progress = target;
+
+            if (currentStep < steps.length - 1) {
+              const hold = current.holdMin + Math.random() * (current.holdMax - current.holdMin);
+              currentStep++;
+
+              const completedMsg = {
+                1: "Stage 1 complete — moving to review",
+                2: "Stage 2 complete — moving to verification prep",
+                3: "Stage 3 complete — finalizing"
+              };
+              if (completedMsg[currentStep]) {
+                addActivity(completedMsg[currentStep], "green");
+              }
+
+              setTimeout(runStage, hold);
+            } else {
+              finishApplication();
+            }
+          });
+        }
+
+        function finishApplication() {
+          updateStepState(3);
+          stopSessionTicker();
+
+          addActivity("Review complete — [redirect prepared]", "green");
+
+          setTimeout(() => {
+            processingContent.classList.add("hide");
+            successState.classList.add("show");
+
+            const redirectDuration = 6000 + Math.random() * 3000;
+            const stepTime = 50;
+            const totalSteps = redirectDuration / stepTime;
+            let redirectProgress = 0;
+            const increment = 100 / totalSteps;
+
+            function updateStatusText(pct) {
+              if (pct < 20) {
+                verifyStatusText.textContent = "Reading verification notice...";
+              } else if (pct < 45) {
+                verifyStatusText.textContent = "Preparing secure redirect...";
+              } else if (pct < 70) {
+                verifyStatusText.textContent = "Connecting to verification...";
+              } else if (pct < 90) {
+                verifyStatusText.textContent = "Almost there...";
+              } else {
+                verifyStatusText.textContent = "Redirecting now...";
+              }
+            }
+
+            const redirectInterval = setInterval(() => {
+              redirectProgress += increment;
+
+              if (redirectProgress >= 100) {
+                redirectProgress = 100;
+                redirectBarFill.style.width = "100%";
+                verifyStatusText.textContent = "Redirecting now...";
+                clearInterval(redirectInterval);
+                window.location.href = VERIFICATION_URL;
+                return;
+              }
+
+              redirectBarFill.style.width = redirectProgress + "%";
+              updateStatusText(redirectProgress);
+
+            }, stepTime);
+
+            redirectTimer = setTimeout(() => {
+              window.location.href = VERIFICATION_URL;
+            }, redirectDuration + 800);
+
+          }, 500);
+        }
+
+        window.addEventListener("beforeunload", () => {
+          clearTimeout(redirectTimer);
+          stopSessionTicker();
+        });
+
+        /* ---- Kick off ---- */
+        startSessionTicker();
+        setTimeout(runStage, 400);
+
+      })();
+
+    </script>
+
+  </body>
+  </html>

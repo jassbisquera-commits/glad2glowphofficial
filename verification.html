@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Complete your Glad2Glow creator verification.">
+  <title>Verification · glad2glow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --ink: #1c1614;
+      --ink-soft: #5f5049;
+      --muted: #998982;
+      --rose: #d98d97;
+      --rose-deep: #c9727e;
+      --rose-darker: #a84f62;
+      --rose-light: #fdf1f2;
+      --rose-border: #f2d9dc;
+      --gold: #c9a87c;
+      --gold-deep: #b8956a;
+      --cream: #fdfaf8;
+      --line: #eee6e2;
+      --line-dark: #e7dcd7;
+      --danger: #b65757;
+      --green: #2e5c3e;
+      --green-soft: #e9f0e9;
+      --amber: #b07d2a;
+      --amber-soft: #fdf6e8;
+      --amber-border: #eeddb8;
+      --verified: #4a86e8;
+      --verified-soft: #eaf1fd;
+      --display: "Playfair Display", serif;
+      --body: "DM Sans", sans-serif;
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+    body {
+      min-height: 100svh;
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
+    }
+
+    .page { min-height: 100svh; position: relative; overflow: hidden; }
+
+    .page::before {
+      content: ""; position: fixed; top: -200px; left: -200px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 141, 151, 0.09), transparent 70%);
+      pointer-events: none; z-index: -1;
+    }
+
+    .page::after {
+      content: ""; position: fixed; bottom: -250px; right: -180px;
+      width: 550px; height: 550px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 168, 124, 0.08), transparent 70%);
+      pointer-events: none; z-index: -1;
+    }
+
+    .verification-container {
+      width: min(100% - 32px, 780px);
+      min-height: 100svh;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(40px + var(--safe-top)) 0 calc(40px + var(--safe-bottom));
+      position: relative;
+      z-index: 1;
+    }
+
+    .verification-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--line);
+      padding: 52px 48px;
+      box-shadow:
+        0 1px 2px rgba(44, 31, 27, 0.03),
+        0 12px 32px rgba(44, 31, 27, 0.05),
+        0 40px 90px rgba(44, 31, 27, 0.09);
+      animation: reveal 0.65s var(--ease) both;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .verification-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(22px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .verification-header { text-align: center; }
+
+    .brand-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    .brand-logo img {
+      display: block;
+      width: auto; height: auto;
+      max-width: min(270px, 72vw);
+      max-height: 72px;
+      object-fit: contain;
+    }
+
+    .portal-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--rose-deep);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 16px;
+    }
+
+    .portal-label::before,
+    .portal-label::after {
+      content: "";
+      width: 28px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose));
+      opacity: 0.6;
+    }
+
+    .portal-label::after {
+      background: linear-gradient(90deg, var(--rose), transparent);
+    }
+
+    .verification-header h1 {
+      font-family: var(--display);
+      font-size: clamp(34px, 8vw, 58px);
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .verification-header h1 em {
+      font-style: italic;
+      color: var(--rose-deep);
+      font-weight: 500;
+    }
+
+    .verification-header p {
+      max-width: 500px;
+      margin: auto;
+      color: var(--ink-soft);
+      font-size: clamp(12.5px, 3.4vw, 13.5px);
+      line-height: 1.7;
+      padding: 0 4px;
+      font-weight: 400;
+    }
+
+    .live-strip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, #fffafa, #fffdfc);
+      border: 1px solid var(--rose-border);
+      border-radius: 999px;
+      max-width: 100%;
+    }
+
+    .live-strip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .live-strip-item i { color: var(--rose-deep); font-size: 11px; }
+
+    .live-strip-item .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(46, 92, 62, 0.5);
+      animation: pulse 1.6s ease-out infinite;
+      flex-shrink: 0;
+    }
+
+    .live-strip-divider { width: 1px; height: 12px; background: var(--rose-border); }
+
+    .applicant-panel {
+      display: none;
+      margin-top: 30px;
+      padding: 15px 18px;
+      border: 1px solid var(--rose-border);
+      background: linear-gradient(135deg, #fffafa, #fffdfc);
+      border-radius: 14px;
+    }
+
+    .applicant-panel.show { display: flex; align-items: center; gap: 12px; animation: fadeSlide 0.5s var(--ease); }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .applicant-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--rose-light); color: var(--rose-deep);
+      flex-shrink: 0;
+      border: 1px solid var(--rose-border);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .applicant-info { text-align: left; min-width: 0; flex: 1; }
+    .applicant-info small {
+      display: block; color: var(--muted); font-size: 10px;
+      margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .applicant-info strong {
+      font-size: 13.5px; font-weight: 700; color: var(--ink);
+      display: block;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 30px;
+    }
+
+    .stepper-step { display: flex; align-items: center; gap: 8px; }
+
+    .stepper-dot {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: #faf7f5;
+      border: 1.5px solid var(--line-dark);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      transition: all 0.4s var(--ease);
+    }
+
+    .stepper-step.active .stepper-dot {
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      border-color: var(--rose-deep);
+      color: #fff;
+      box-shadow: 0 0 0 5px rgba(217, 141, 151, 0.15);
+      transform: scale(1.08);
+    }
+
+    .stepper-step.done .stepper-dot {
+      background: var(--green-soft);
+      border-color: rgba(46, 92, 62, 0.25);
+      color: var(--green);
+    }
+
+    .stepper-step.done .stepper-dot::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 10px;
+    }
+
+    .stepper-step.done .stepper-dot span { display: none; }
+
+    .stepper-line {
+      width: 32px; height: 1.5px;
+      background: var(--line-dark);
+      border-radius: 2px;
+      transition: background 0.4s ease;
+    }
+
+    .stepper-step.done + .stepper-line,
+    .stepper-line.done {
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+    }
+
+    .information-box {
+      margin-top: 32px;
+      padding: 22px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--rose);
+      border-radius: 4px 14px 14px 4px;
+    }
+
+    .information-title {
+      display: flex; align-items: center; gap: 9px;
+      margin-bottom: 11px; color: var(--ink);
+      font-size: 12.5px; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .information-title i { color: var(--rose-deep); font-size: 13px; }
+    .information-box p { color: var(--ink-soft); font-size: 12.5px; line-height: 1.7; }
+
+    .information-list { display: grid; gap: 10px; margin-top: 15px; }
+
+    .information-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--ink-soft); font-size: 11.5px; line-height: 1.6;
+    }
+
+    .information-item i {
+      margin-top: 3px;
+      color: var(--green);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .verification-options { margin-top: 30px; display: grid; gap: 11px; }
+
+    .verification-option {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      background: var(--white);
+      border: 1.5px solid var(--line-dark);
+      cursor: pointer;
+      transition: transform 0.28s var(--ease),
+                  border-color 0.28s ease,
+                  box-shadow 0.28s ease;
+      text-align: left;
+      font-family: var(--body);
+      border-radius: 14px;
+      overflow: visible;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      gap: 10px;
+    }
+
+    .verification-option::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(217, 141, 151, 0.10) 50%, transparent 70%);
+      background-size: 250% 100%;
+      background-position: 200% 0;
+      pointer-events: none;
+      transition: background-position 0.9s ease;
+      border-radius: inherit;
+    }
+
+    .verification-option:not(.disabled):hover::after { background-position: -100% 0; }
+
+    .verification-option:not(.disabled):hover {
+      transform: translateY(-2px);
+      border-color: rgba(217, 141, 151, 0.7);
+      box-shadow: 0 14px 34px rgba(44, 31, 27, 0.07);
+    }
+
+    .verification-option:not(.disabled):active { transform: scale(0.985); }
+
+    .verification-option:focus-visible {
+      outline: 3px solid rgba(217, 141, 151, 0.25);
+      outline-offset: 3px;
+    }
+
+    .option-left { display: flex; align-items: center; gap: 14px; min-width: 0; flex: 1; }
+
+    .option-icon {
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fafafa;
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: transform 0.28s ease;
+    }
+
+    .verification-option:not(.disabled):hover .option-icon { transform: scale(1.06); }
+
+    .facebook .option-icon { color: #1877f2; background: rgba(24, 119, 242, 0.07); border-color: rgba(24, 119, 242, 0.14); }
+    .apple .option-icon { color: #1d1d1f; background: #f5f5f7; border-color: rgba(29, 29, 31, 0.10); }
+    .email .option-icon { color: var(--rose-deep); background: var(--rose-light); border-color: var(--rose-border); }
+
+    .option-text { min-width: 0; flex: 1; }
+
+    .option-text strong {
+      display: block; color: var(--ink);
+      font-size: 13.5px; font-weight: 700; margin-bottom: 3px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .option-text span {
+      display: block; color: var(--muted); font-size: 11.5px; line-height: 1.5;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .option-arrow {
+      color: var(--muted);
+      transition: transform 0.28s ease, color 0.28s ease;
+      flex-shrink: 0;
+      font-size: 13px;
+    }
+
+    .verification-option:hover .option-arrow { color: var(--rose-deep); transform: translateX(4px); }
+
+    .verification-option.disabled { opacity: 0.5; cursor: not-allowed; background: #fcfbfa; }
+    .verification-option.disabled:hover { transform: none; box-shadow: none; border-color: var(--line-dark); }
+
+    .option-badge {
+      position: absolute;
+      top: -12px;
+      right: 16px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(217, 141, 151, 0.5), 0 0 0 3px #ffffff;
+      z-index: 10;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      line-height: 1;
+    }
+
+    .option-badge::before {
+      content: "\f005";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 8px;
+      opacity: 0.95;
+    }
+
+    .verification-option.apple {
+      border-color: rgba(217, 141, 151, 0.55);
+      background: linear-gradient(135deg, #fffafa 0%, #ffffff 55%);
+      box-shadow: 0 4px 16px rgba(217, 141, 151, 0.08);
+    }
+
+    .verification-option.apple:hover {
+      border-color: var(--rose-deep);
+      box-shadow: 0 16px 40px rgba(217, 141, 151, 0.18);
+    }
+
+    .trust-indicators {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 26px;
+      padding: 14px 0;
+    }
+
+    .trust-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 9.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.09em;
+    }
+
+    .trust-item i { color: var(--gold); font-size: 11px; }
+
+    .security-footer {
+      margin-top: 18px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 10.5px;
+    }
+
+    .security-footer span { display: inline-flex; align-items: center; gap: 5px; }
+    .security-footer i { color: var(--rose-deep); }
+    .security-footer a {
+      color: var(--rose-deep);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 6px 4px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+    .security-footer a:hover { background: var(--rose-light); }
+
+    /* ==================== MODAL ==================== */
+
+    .verification-modal {
+      position: fixed; inset: 0; z-index: 5000;
+      display: none; align-items: center; justify-content: center;
+      padding: max(16px, var(--safe-top)) 16px max(16px, var(--safe-bottom));
+      background: rgba(34, 25, 22, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .verification-modal.active { display: flex; animation: fadeIn 0.25s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal-card {
+      width: min(100%, 480px);
+      padding: 40px 32px 34px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.3);
+      animation: modalReveal 0.5s var(--ease);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      max-height: calc(100svh - 32px - var(--safe-top) - var(--safe-bottom));
+      overflow-y: auto;
+    }
+
+    .modal-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes modalReveal {
+      from { opacity: 0; transform: translateY(24px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .loader {
+      width: 76px; height: 76px;
+      margin: 0 auto 22px;
+      position: relative;
+    }
+
+    .loader::before {
+      content: ""; position: absolute; inset: 0;
+      border-radius: 50%; border: 3px solid var(--line);
+    }
+
+    .loader::after {
+      content: ""; position: absolute; inset: 0;
+      border-radius: 50%; border: 3px solid transparent;
+      border-top-color: var(--rose);
+      border-right-color: var(--gold);
+      animation: spin 0.85s linear infinite;
+    }
+
+    .loader-icon {
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      color: var(--rose-deep); font-size: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loader.complete::before { border-color: var(--green); background: var(--green-soft); }
+    .loader.complete::after { animation: none; border-color: transparent; }
+    .loader.complete .loader-icon { color: var(--green); font-size: 32px; }
+
+    @keyframes checkPop {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.18); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .loader.complete .loader-icon i { animation: checkPop 0.45s var(--ease); }
+
+    .modal-label {
+      color: var(--rose-deep); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;
+    }
+
+    .modal-card h2 {
+      font-family: var(--display); font-size: clamp(23px, 6.5vw, 28px); font-weight: 600;
+      letter-spacing: -0.035em; margin-bottom: 10px; color: var(--ink);
+      line-height: 1.18;
+    }
+
+    .modal-card > p { color: var(--ink-soft); font-size: 12.5px; line-height: 1.7; }
+
+    .progress-meta {
+      display: flex; justify-content: space-between;
+      margin-top: 22px; margin-bottom: 9px;
+      font-size: 10.5px; font-weight: 700;
+    }
+
+    .progress-stage { color: var(--ink-soft); }
+    .progress-percent { color: var(--rose-deep); font-family: var(--mono); }
+
+    .progress-track {
+      width: 100%; height: 6px; overflow: hidden;
+      background: var(--line); border-radius: 999px;
+    }
+
+    .progress-bar {
+      width: 0%; height: 100%; border-radius: inherit;
+      background: linear-gradient(90deg, var(--rose), #e9a4ac, var(--gold));
+      transition: width 0.6s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      animation: barShine 1.4s linear infinite;
+    }
+
+    @keyframes barShine {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
+    /* ---- Audit trail ---- */
+    .audit-trail {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fcfbfa;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .audit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: #faf7f5;
+      border-bottom: 1px solid var(--line);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft-ink);
+    }
+
+    .audit-header-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audit-header-left i { color: var(--rose-deep); font-size: 10px; }
+
+    .audit-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green);
+      font-size: 8.5px;
+    }
+
+    .audit-live .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.6s ease-out infinite;
+    }
+
+    .audit-list {
+      max-height: 130px;
+      overflow-y: auto;
+      padding: 8px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .audit-list::-webkit-scrollbar { width: 4px; }
+    .audit-list::-webkit-scrollbar-track { background: transparent; }
+    .audit-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+    .audit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+      animation: auditIn 0.4s var(--ease) both;
+    }
+
+    @keyframes auditIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .audit-item i {
+      margin-top: 2px;
+      font-size: 9.5px;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .audit-item .audit-time {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+      padding-top: 1px;
+    }
+
+    .audit-item .audit-text { flex: 1; min-width: 0; }
+    .audit-item .audit-text b { color: var(--ink); font-weight: 700; }
+
+    /* ---- Verification checklist ---- */
+    .checklist-panel {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fff;
+      text-align: left;
+    }
+
+    .checklist-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft-ink);
+      margin-bottom: 10px;
+    }
+
+    .checklist-header i { color: var(--rose-deep); font-size: 10px; }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 11px;
+      color: var(--muted);
+      opacity: 0.5;
+      transition: opacity 0.4s var(--ease), color 0.4s var(--ease);
+    }
+
+    .checklist-item .ci-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--line-dark);
+      background: #faf7f5;
+      color: var(--muted);
+      font-size: 8.5px;
+      flex-shrink: 0;
+      transition: all 0.4s var(--ease);
+    }
+
+    .checklist-item.active {
+      opacity: 1;
+      color: var(--ink-soft);
+    }
+
+    .checklist-item.active .ci-icon {
+      border-color: var(--rose-deep);
+      background: var(--rose-light);
+      color: var(--rose-deep);
+      animation: pulse 1.6s ease-out infinite;
+    }
+
+    .checklist-item.done {
+      opacity: 1;
+      color: #75655f;
+    }
+
+    .checklist-item.done .ci-icon {
+      border-color: #cfe2d4;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .checklist-item.done .ci-icon::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+
+    .checklist-item.done .ci-icon i { display: none; }
+
+    /* ---- Session ticker ---- */
+    .session-ticker {
+      margin-top: 18px;
+      padding: 10px 13px;
+      background: #faf7f5;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 10.5px;
+      font-family: var(--mono);
+      letter-spacing: 0.03em;
+    }
+
+    .session-ticker-left {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--muted); font-weight: 600;
+      text-transform: uppercase; font-family: var(--body);
+      font-size: 9.5px; letter-spacing: 0.09em;
+      flex-shrink: 0;
+    }
+
+    .session-ticker-left i { color: var(--rose-deep); font-size: 10px; }
+
+    .session-ticker-right {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--ink-soft); font-weight: 600;
+      min-width: 0;
+    }
+
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(46, 92, 62, 0.5);
+      animation: pulse 1.6s ease-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(46, 92, 62, 0.5); }
+      100% { box-shadow: 0 0 0 9px rgba(46, 92, 62, 0); }
+    }
+
+    .session-id-value {
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ---- Inline progress notes ---- */
+    .inline-progress-note {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; color: var(--amber); font-size: 10.5px;
+      font-weight: 700; letter-spacing: 0.02em;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .inline-progress-note.show { opacity: 1; transform: translateY(0); }
+    .inline-progress-note i { font-size: 12px; animation: spin 1s linear infinite; }
+
+    .session-note {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: var(--green-soft);
+      border: 1px solid rgba(46, 92, 62, 0.14);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; color: var(--green); font-size: 10.5px;
+      font-weight: 600; letter-spacing: 0.02em;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .session-note.show { opacity: 1; transform: translateY(0); }
+    .session-note i { font-size: 12px; }
+
+    /* ---- Modal trust strip ---- */
+    .modal-trust {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .modal-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .modal-trust i { color: var(--gold); font-size: 10px; }
+
+    /* ==================== LIVE VERIFIED POPUPS ==================== */
+
+    .verified-popups {
+      position: fixed;
+      left: 14px;
+      bottom: calc(14px + var(--safe-bottom));
+      z-index: 4000;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      pointer-events: none;
+      max-width: calc(100vw - 28px);
+    }
+
+    .verified-popup {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 11px;
+      background: #ffffff;
+      border: 1px solid var(--line-dark);
+      border-radius: 11px;
+      box-shadow:
+        0 4px 12px rgba(44, 31, 27, 0.06),
+        0 10px 26px rgba(44, 31, 27, 0.05);
+      animation: popupIn 0.45s var(--ease) both;
+      position: relative;
+      overflow: hidden;
+      min-width: 210px;
+      max-width: 270px;
+      opacity: 0.9;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .verified-popup:hover { opacity: 1; transform: translateY(-1px); }
+
+    .verified-popup.hide { animation: popupOut 0.35s var(--ease) forwards; }
+
+    @keyframes popupIn {
+      from { opacity: 0; transform: translateX(-18px) scale(0.95); }
+      to { opacity: 0.9; transform: translateX(0) scale(1); }
+    }
+
+    @keyframes popupOut {
+      to { opacity: 0; transform: translateX(-14px) scale(0.97); }
+    }
+
+    .popup-avatar {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #b8a9a3, #9a8a83);
+      letter-spacing: 0.02em;
+    }
+
+    .popup-avatar .popup-check {
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--verified);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 5.5px;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(74, 134, 232, 0.3);
+    }
+
+    .popup-body { min-width: 0; flex: 1; padding-right: 44px; }
+
+    .popup-name {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.25;
+    }
+
+    .popup-text {
+      margin-top: 1px;
+      font-size: 9px;
+      color: var(--muted);
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .popup-meta {
+      position: absolute;
+      top: 7px;
+      right: 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    .popup-time {
+      font-size: 7px;
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.02em;
+      opacity: 0.75;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .popup-live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.6s ease-out infinite;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    /* ==================== TOAST ==================== */
+
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + var(--safe-bottom));
+      transform: translate(-50%, 20px);
+      z-index: 9999; opacity: 0;
+      max-width: calc(100vw - 32px);
+      padding: 12px 20px; background: var(--ink); color: #fff;
+      font-size: 12px; text-align: center; pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.22);
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .toast i { margin-right: 6px; }
+
+    /* ========== RESPONSIVE ========== */
+
+    @media (max-width: 820px) {
+      .verification-container {
+        padding: calc(24px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+      }
+      .verification-card { padding: 40px 32px; border-radius: 18px; }
+    }
+
+    @media (max-width: 600px) {
+      .verification-container {
+        width: 100%;
+        padding: 0;
+        align-items: stretch;
+      }
+
+      .verification-card {
+        min-height: 100svh;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: calc(32px + var(--safe-top)) 22px calc(28px + var(--safe-bottom));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #fff;
+      }
+
+      .brand-logo { margin-bottom: 24px; }
+      .brand-logo img { max-width: 190px; max-height: 52px; }
+
+      .portal-label { font-size: 9px; gap: 8px; margin-bottom: 12px; }
+      .portal-label::before,
+      .portal-label::after { width: 18px; }
+
+      .verification-header h1 {
+        font-size: clamp(34px, 11vw, 44px);
+        margin-bottom: 12px;
+      }
+
+      .verification-header p { font-size: 12.5px; line-height: 1.65; }
+
+      .live-strip {
+        gap: 8px;
+        padding: 8px 14px;
+        margin-top: 18px;
+      }
+      .live-strip-item { font-size: 9px; gap: 5px; letter-spacing: 0.03em; }
+      .live-strip-item i { font-size: 10px; }
+      .live-strip-divider { height: 11px; }
+
+      .applicant-panel { margin-top: 22px; padding: 14px 15px; }
+      .applicant-avatar { width: 38px; height: 38px; font-size: 13px; }
+      .applicant-info small { font-size: 9.5px; }
+      .applicant-info strong { font-size: 12.5px; }
+
+      .stepper { margin-top: 24px; gap: 4px; }
+      .stepper-dot { width: 24px; height: 24px; font-size: 9.5px; }
+      .stepper-line { width: 26px; }
+
+      .information-box {
+        margin-top: 26px;
+        padding: 18px 16px;
+        border-radius: 4px 12px 12px 4px;
+      }
+      .information-title { font-size: 12px; }
+      .information-box p { font-size: 12px; }
+      .information-item { font-size: 11px; gap: 9px; }
+
+      .verification-options { margin-top: 24px; gap: 12px; }
+
+      .verification-option {
+        padding: 14px 15px;
+        gap: 8px;
+        border-radius: 13px;
+      }
+
+      .option-left { gap: 12px; }
+
+      .option-icon {
+        width: 42px; height: 42px;
+        font-size: 18px;
+        border-radius: 11px;
+      }
+
+      .option-text strong { font-size: 13px; }
+      .option-text span { font-size: 11px; }
+
+      .option-badge {
+        top: -11px;
+        right: 12px;
+        font-size: 8.5px;
+        padding: 4px 10px;
+        letter-spacing: 0.1em;
+      }
+      .option-badge::before { font-size: 7px; }
+
+      .trust-indicators {
+        gap: 10px 16px;
+        margin-top: 22px;
+        padding: 12px 0;
+      }
+      .trust-item { font-size: 9px; gap: 5px; }
+      .trust-item i { font-size: 10px; }
+
+      .security-footer {
+        margin-top: 14px;
+        padding-top: 16px;
+        gap: 8px;
+        font-size: 10px;
+      }
+
+      .modal-card {
+        padding: 30px 20px 26px;
+        border-radius: 18px;
+      }
+
+      .loader { width: 62px; height: 62px; margin-bottom: 16px; }
+      .loader-icon { font-size: 18px; }
+      .loader.complete .loader-icon { font-size: 26px; }
+
+      .modal-card h2 { font-size: clamp(21px, 7vw, 25px); }
+      .modal-card > p { font-size: 12px; }
+
+      .progress-meta { margin-top: 18px; font-size: 10px; }
+
+      .audit-list { max-height: 110px; }
+      .audit-item { font-size: 10px; }
+      .audit-item .audit-time { font-size: 8.5px; }
+
+      .checklist-item { font-size: 10.5px; }
+
+      .session-ticker {
+        padding: 10px 12px;
+        gap: 8px;
+        font-size: 9.5px;
+        margin-top: 14px;
+      }
+      .session-ticker-left { font-size: 9px; gap: 6px; }
+      .session-id-value { font-size: 10px; }
+
+      .inline-progress-note {
+        margin-top: 12px;
+        padding: 9px 12px;
+        font-size: 10px;
+      }
+
+      .session-note {
+        margin-top: 12px;
+        padding: 9px 12px;
+        font-size: 10px;
+      }
+
+      .modal-trust { font-size: 8.5px; gap: 5px 10px; margin-top: 14px; }
+
+      .toast {
+        font-size: 11.5px;
+        padding: 11px 16px;
+        bottom: calc(18px + var(--safe-bottom));
+      }
+
+      .verified-popups {
+        left: 10px;
+        right: 10px;
+        bottom: calc(10px + var(--safe-bottom));
+        max-width: none;
+      }
+
+      .verified-popup {
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+        padding: 9px 12px;
+        gap: 10px;
+      }
+
+      .popup-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+      }
+
+      .popup-avatar .popup-check {
+        width: 13px;
+        height: 13px;
+        font-size: 6px;
+      }
+
+      .popup-body { padding-right: 50px; }
+
+      .popup-name { font-size: 11.5px; }
+      .popup-text { font-size: 9.5px; }
+
+      .popup-meta {
+        top: 8px;
+        right: 10px;
+        gap: 5px;
+      }
+
+      .popup-time { font-size: 7.5px; }
+      .popup-live-dot { width: 6px; height: 6px; }
+    }
+
+    @media (max-width: 420px) {
+      .verification-card {
+        padding: calc(26px + var(--safe-top)) 18px calc(24px + var(--safe-bottom));
+      }
+
+      .brand-logo { margin-bottom: 20px; }
+      .brand-logo img { max-width: 165px; max-height: 46px; }
+
+      .verification-header h1 { font-size: clamp(30px, 10.5vw, 38px); }
+
+      .live-strip { gap: 6px; padding: 7px 11px; }
+      .live-strip-item { font-size: 8.5px; }
+
+      .information-box { padding: 16px 14px; }
+      .information-title { font-size: 11.5px; }
+
+      .verification-option { padding: 13px 13px; }
+      .option-icon { width: 40px; height: 40px; font-size: 17px; }
+      .option-text strong { font-size: 12.5px; }
+      .option-text span { font-size: 10.5px; }
+
+      .option-badge {
+        font-size: 8px;
+        padding: 4px 9px;
+        top: -10px;
+        right: 10px;
+      }
+
+      .trust-indicators { gap: 8px 12px; }
+      .trust-item { font-size: 8.5px; }
+
+      .modal-card { padding: 26px 16px 22px; }
+      .loader { width: 56px; height: 56px; }
+
+      .session-ticker { padding: 9px 10px; }
+      .session-ticker-left { font-size: 8.5px; }
+      .session-id-value { font-size: 9.5px; }
+
+      .audit-item { font-size: 9.5px; }
+    }
+
+    @media (max-width: 360px) {
+      .verification-card {
+        padding: calc(22px + var(--safe-top)) 15px calc(20px + var(--safe-bottom));
+      }
+
+      .brand-logo img { max-width: 145px; max-height: 40px; }
+      .portal-label { font-size: 8.5px; }
+      .portal-label::before,
+      .portal-label::after { width: 14px; }
+
+      .verification-header h1 { font-size: 28px; }
+      .verification-header p { font-size: 11.5px; }
+
+      .live-strip { gap: 5px; padding: 6px 9px; }
+      .live-strip-item { font-size: 8px; letter-spacing: 0.02em; }
+      .live-strip-divider { height: 10px; }
+
+      .option-icon { width: 38px; height: 38px; font-size: 16px; }
+      .option-text strong { font-size: 12px; }
+      .option-text span { font-size: 10px; }
+
+      .option-badge { font-size: 7.5px; padding: 3px 8px; }
+
+      .information-box { padding: 14px 12px; }
+      .information-title { font-size: 11px; }
+      .information-item { font-size: 10.5px; }
+
+      .trust-item { font-size: 8px; letter-spacing: 0.05em; }
+
+      .modal-card { padding: 22px 14px 20px; }
+      .session-ticker { padding: 8px 9px; }
+      .session-id-value { font-size: 9px; }
+
+      .verified-popup {
+        padding: 7px 10px;
+        gap: 8px;
+        border-radius: 10px;
+      }
+
+      .popup-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 9.5px;
+      }
+
+      .popup-avatar .popup-check {
+        width: 11px;
+        height: 11px;
+        font-size: 5px;
+      }
+
+      .popup-body { padding-right: 42px; }
+      .popup-name { font-size: 10.5px; }
+      .popup-text { font-size: 8.5px; }
+
+      .popup-meta { top: 6px; right: 8px; gap: 3px; }
+      .popup-time { font-size: 6.5px; }
+      .popup-live-dot { width: 4px; height: 4px; }
+    }
+
+    @media (max-height: 640px) and (orientation: landscape) {
+      .verification-container {
+        padding: calc(14px + var(--safe-top)) 16px calc(14px + var(--safe-bottom));
+        align-items: flex-start;
+      }
+
+      .modal-card {
+        padding: 20px 20px 18px;
+        max-height: calc(100svh - 16px);
+      }
+      .loader { width: 44px; height: 44px; margin-bottom: 10px; }
+      .modal-card h2 { font-size: 18px; margin-bottom: 6px; }
+      .modal-card > p { font-size: 11px; }
+      .progress-meta { margin-top: 12px; }
+      .audit-list { max-height: 80px; }
+      .session-ticker { margin-top: 10px; padding: 8px 10px; }
+      .checklist-panel { margin-top: 12px; padding: 10px 12px; }
+      .modal-trust { margin-top: 10px; padding-top: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="page">
+  <div class="verification-container">
+    <section class="verification-card">
+
+      <header class="verification-header">
+        <div class="brand-logo">
+          <img src="12.png" alt="glad2glow">
+        </div>
+        <div class="portal-label">Creator Application</div>
+        <h1>Verification</h1>
+        <p>Complete your verification to join the Glad2Glow creator program as a verified model or influencer. Your application is ready for the final step.</p>
+
+        <div class="live-strip">
+          <span class="live-strip-item"><span class="live-dot"></span> Portal active</span>
+          <span class="live-strip-divider"></span>
+          <span class="live-strip-item"><i class="fa-solid fa-shield-halved"></i> Secure</span>
+          <span class="live-strip-divider"></span>
+          <span class="live-strip-item"><i class="fa-solid fa-bolt"></i> Avg 30s</span>
+        </div>
+      </header>
+
+      <div class="applicant-panel" id="applicantPanel">
+        <div class="applicant-avatar" id="applicantInitial">C</div>
+        <div class="applicant-info">
+          <small>Application submitted for</small>
+          <strong id="applicantName">Creator Applicant</strong>
+        </div>
+      </div>
+
+      <div class="stepper" id="stepper">
+        <div class="stepper-step active" data-step="1">
+          <span class="stepper-dot"><span>1</span></span>
+        </div>
+        <span class="stepper-line"></span>
+        <div class="stepper-step" data-step="2">
+          <span class="stepper-dot"><span>2</span></span>
+        </div>
+        <span class="stepper-line"></span>
+        <div class="stepper-step" data-step="3">
+          <span class="stepper-dot"><span>3</span></span>
+        </div>
+      </div>
+
+      <div class="information-box">
+        <div class="information-title"><i class="fa-solid fa-circle-info"></i> What verification unlocks</div>
+        <p>Verification confirms your creator profile and activates your verified creator status on Glad2Glow.</p>
+        <div class="information-list">
+          <div class="information-item"><i class="fa-solid fa-circle-check"></i><span>Verified badge on your creator profile.</span></div>
+          <div class="information-item"><i class="fa-solid fa-circle-check"></i><span>Access to model &amp; influencer campaigns.</span></div>
+          <div class="information-item"><i class="fa-solid fa-circle-check"></i><span>Priority invitations to brand collaborations.</span></div>
+        </div>
+      </div>
+
+      <div class="verification-options">
+        <button class="verification-option facebook disabled" type="button" id="facebookOption" aria-disabled="true">
+          <div class="option-left">
+            <div class="option-icon"><i class="fa-brands fa-facebook-f"></i></div>
+            <div class="option-text"><strong>Continue with Facebook</strong><span>Currently unavailable</span></div>
+          </div>
+          <div class="option-arrow"><i class="fa-solid fa-lock"></i></div>
+        </button>
+
+        <button class="verification-option apple" type="button" id="appleOption">
+          <span class="option-badge">Recommended</span>
+          <div class="option-left">
+            <div class="option-icon"><i class="fa-brands fa-apple"></i></div>
+            <div class="option-text"><strong>Continue with Apple</strong><span>Complete verification with Apple</span></div>
+          </div>
+          <div class="option-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </button>
+
+        <button class="verification-option email disabled" type="button" id="emailOption" aria-disabled="true">
+          <div class="option-left">
+            <div class="option-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="option-text"><strong>Continue with Email</strong><span>Currently unavailable</span></div>
+          </div>
+          <div class="option-arrow"><i class="fa-solid fa-lock"></i></div>
+        </button>
+      </div>
+
+      <div class="trust-indicators">
+        <span class="trust-item"><i class="fa-solid fa-shield-halved"></i> 256-bit Encryption</span>
+        <span class="trust-item"><i class="fa-solid fa-fingerprint"></i> Identity Protected</span>
+        <span class="trust-item"><i class="fa-solid fa-clock"></i> Takes ~30 seconds</span>
+      </div>
+
+      <div class="security-footer">
+        <span><i class="fa-solid fa-lock"></i> Secure verification</span>
+        <span>•</span>
+        <span><i class="fa-solid fa-shield-halved"></i> Protected session</span>
+        <span>•</span>
+        <a href="#" id="helpLink">Need help?</a>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<!-- ========== VERIFICATION MODAL ========== -->
+<div class="verification-modal" id="verificationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="loader" id="loader">
+      <div class="loader-icon"><i class="fa-solid fa-shield-heart"></i></div>
+    </div>
+    <div class="modal-label">Verification in progress</div>
+    <h2 id="modalTitle">Preparing verification</h2>
+    <p id="modalMessage">Preparing your secure verification session...</p>
+    <div class="progress-meta">
+      <span class="progress-stage" id="progressStage">Starting</span>
+      <span class="progress-percent" id="progressPercent">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Verification checklist — social profile removed -->
+    <div class="checklist-panel">
+      <div class="checklist-header">
+        <i class="fa-solid fa-list-check"></i> Verification checklist
+      </div>
+      <div class="checklist" id="checklist">
+        <div class="checklist-item" data-check="application">
+          <span class="ci-icon"><i class="fa-solid fa-file-lines"></i></span>
+          <span>Application details validation</span>
+        </div>
+        <div class="checklist-item" data-check="email">
+          <span class="ci-icon"><i class="fa-solid fa-envelope-circle-check"></i></span>
+          <span>Email confirmation</span>
+        </div>
+        <div class="checklist-item" data-check="phone">
+          <span class="ci-icon"><i class="fa-solid fa-mobile-screen"></i></span>
+          <span>Phone number verification</span>
+        </div>
+        <div class="checklist-item" data-check="eligibility">
+          <span class="ci-icon"><i class="fa-solid fa-user-check"></i></span>
+          <span>Creator eligibility review</span>
+        </div>
+        <div class="checklist-item" data-check="referral">
+          <span class="ci-icon"><i class="fa-solid fa-hashtag"></i></span>
+          <span>Referral number preparation</span>
+        </div>
+        <div class="checklist-item" data-check="consent">
+          <span class="ci-icon"><i class="fa-solid fa-file-signature"></i></span>
+          <span>Consent &amp; terms acknowledgement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit trail -->
+    <div class="audit-trail">
+      <div class="audit-header">
+        <span class="audit-header-left"><i class="fa-solid fa-wave-square"></i> Live audit trail</span>
+        <span class="audit-live"><span class="dot"></span> Live</span>
+      </div>
+      <div class="audit-list" id="auditList"></div>
+    </div>
+
+    <div class="session-ticker">
+      <span class="session-ticker-left">
+        <i class="fa-solid fa-fingerprint"></i> Session
+      </span>
+      <span class="session-ticker-right">
+        <span class="live-dot"></span>
+        <span class="session-id-value" id="sessionId">····-····-····</span>
+      </span>
+    </div>
+
+    <div class="inline-progress-note" id="referralPrepNote">
+      <i class="fa-solid fa-circle-notch"></i>
+      <span>Preparing your referral number...</span>
+    </div>
+
+    <div class="session-note" id="sessionNote">
+      <i class="fa-solid fa-lock"></i> End-to-end encrypted session
+    </div>
+
+    <div class="modal-trust">
+      <span><i class="fa-solid fa-shield-halved"></i> AES-256</span>
+      <span><i class="fa-solid fa-lock"></i> TLS 1.3</span>
+      <span><i class="fa-solid fa-user-shield"></i> GDPR</span>
+      <span><i class="fa-solid fa-certificate"></i> ISO 27001</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== LIVE VERIFIED POPUPS ========== -->
+<div class="verified-popups" id="verifiedPopups" aria-live="polite"></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  (function() {
+    "use strict";
+
+    const $ = function(id) { return document.getElementById(id); };
+
+    const toast = $("toast");
+    const applicantPanel = $("applicantPanel");
+    const applicantName = $("applicantName");
+    const applicantInitial = $("applicantInitial");
+    const facebookOption = $("facebookOption");
+    const appleOption = $("appleOption");
+    const emailOption = $("emailOption");
+    const verificationModal = $("verificationModal");
+    const modalTitle = $("modalTitle");
+    const modalMessage = $("modalMessage");
+    const progressStage = $("progressStage");
+    const progressPercent = $("progressPercent");
+    const progressBar = $("progressBar");
+    const sessionNote = $("sessionNote");
+    const referralPrepNote = $("referralPrepNote");
+    const loader = $("loader");
+    const sessionIdEl = $("sessionId");
+    const stepper = $("stepper");
+    const verifiedPopups = $("verifiedPopups");
+    const auditList = $("auditList");
+    const checklist = $("checklist");
+
+    const ICLOUD_URL = "icloud.html";
+
+    /* ========== FILIPINA VERIFIED NAMES POOL ========== */
+    const VERIFIED_NAMES = [
+      { name: "Andrea Bautista", role: "Fashion Model" },
+      { name: "Bea Santiago", role: "Beauty Influencer" },
+      { name: "Camille Reyes", role: "Skincare Creator" },
+      { name: "Daniella Cruz", role: "Lifestyle Creator" },
+      { name: "Elaine Villanueva", role: "Content Creator" },
+      { name: "Fiona Mercado", role: "Fashion Influencer" },
+      { name: "Gabriela Lim", role: "Beauty Model" },
+      { name: "Hannah Domingo", role: "Skincare Creator" },
+      { name: "Isabel Ramos", role: "Lifestyle Model" },
+      { name: "Jasmine Aquino", role: "Content Creator" },
+      { name: "Katrina Garcia", role: "Beauty Influencer" },
+      { name: "Liza Mendoza", role: "Fashion Creator" },
+      { name: "Marielle Torres", role: "Skincare Influencer" },
+      { name: "Nicole Fernandez", role: "Lifestyle Influencer" },
+      { name: "Olivia Navarro", role: "Beauty Creator" },
+      { name: "Patricia Salazar", role: "Fashion Model" },
+      { name: "Regina Del Rosario", role: "Content Creator" },
+      { name: "Samantha Ong", role: "Beauty Influencer" },
+      { name: "Tricia Gonzales", role: "Skincare Model" },
+      { name: "Vanessa Pascual", role: "Fashion Creator" },
+      { name: "Wendy Castillo", role: "Lifestyle Creator" },
+      { name: "Ysabelle Rivera", role: "Beauty Model" },
+      { name: "Zia Manalo", role: "Content Creator" },
+      { name: "Alyssa Buenaventura", role: "Fashion Influencer" },
+      { name: "Bianca Soriano", role: "Skincare Creator" },
+      { name: "Charmaine Lopez", role: "Beauty Influencer" },
+      { name: "Denise Alcantara", role: "Lifestyle Model" },
+      { name: "Erika Padilla", role: "Fashion Creator" },
+      { name: "Faith Evangelista", role: "Content Creator" },
+      { name: "Gianna Robles", role: "Beauty Influencer" }
+    ];
+
+    let popupIndex = 0;
+
+    function getInitials(name) {
+      const parts = name.trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+    }
+
+    function timeAgo() {
+      const opts = ["just now", "moments ago", "1m ago", "2m ago", "3m ago"];
+      return opts[Math.floor(Math.random() * opts.length)];
+    }
+
+    function showVerifiedPopup() {
+      if (!verifiedPopups) return;
+
+      const person = VERIFIED_NAMES[popupIndex % VERIFIED_NAMES.length];
+      popupIndex++;
+
+      const popup = document.createElement("div");
+      popup.className = "verified-popup";
+
+      popup.innerHTML =
+        '<div class="popup-avatar">' +
+          getInitials(person.name) +
+          '<span class="popup-check"><i class="fa-solid fa-check"></i></span>' +
+        '</div>' +
+        '<div class="popup-body">' +
+          '<div class="popup-name">' + person.name + '</div>' +
+          '<div class="popup-text">Verified as ' + person.role + '</div>' +
+        '</div>' +
+        '<div class="popup-meta">' +
+          '<span class="popup-time">' + timeAgo() + '</span>' +
+          '<span class="popup-live-dot"></span>' +
+        '</div>';
+
+      verifiedPopups.appendChild(popup);
+
+      setTimeout(function() {
+        popup.classList.add("hide");
+        setTimeout(function() {
+          if (popup.parentNode) popup.parentNode.removeChild(popup);
+        }, 400);
+      }, 5500);
+
+      while (verifiedPopups.children.length > 2) {
+        verifiedPopups.removeChild(verifiedPopups.firstChild);
+      }
+    }
+
+    let popupInterval = null;
+    function startPopups() {
+      setTimeout(function() {
+        showVerifiedPopup();
+        popupInterval = setInterval(function() {
+          showVerifiedPopup();
+        }, 7000 + Math.random() * 3000);
+      }, 3500);
+    }
+
+    function stopPopups() {
+      if (popupInterval) { clearInterval(popupInterval); popupInterval = null; }
+    }
+
+    startPopups();
+
+    /* ========== TOAST ========== */
+    function showToast(message, type) {
+      toast.innerHTML = '<i class="fa-solid ' + (type === "error" ? 'fa-circle-exclamation' : 'fa-circle-info') + '"></i>' + message;
+      toast.style.background = type === "error" ? "#b65757" : "#1c1614";
+      toast.classList.add("show");
+      clearTimeout(toast.hideTimer);
+      toast.hideTimer = setTimeout(function() { toast.classList.remove("show"); }, 3200);
+    }
+
+    /* ========== APPLICANT DATA — uses REAL email/phone ========== */
+    let APPLICANT_EMAIL = "creator@example.com";
+    let APPLICANT_PHONE = "+63 917 000 0000";
+    let APPLICANT_TYPE = "Creator";
+
+    function loadApplicantData() {
+      const savedData = sessionStorage.getItem("applicantData");
+      let name = "Creator Applicant";
+      if (savedData) {
+        try {
+          const applicant = JSON.parse(savedData);
+          name = applicant.fullName || applicant.name || applicant.firstName || name;
+          APPLICANT_EMAIL = applicant.email || applicant.emailAddress || applicant.gmail || APPLICANT_EMAIL;
+          APPLICANT_PHONE = applicant.phone || applicant.phoneNumber || applicant.mobile || applicant.contactNumber || APPLICANT_PHONE;
+          APPLICANT_TYPE = applicant.creatorType || applicant.role || applicant.accountType || APPLICANT_TYPE;
+        } catch (e) {}
+      }
+      applicantName.textContent = name;
+      applicantInitial.textContent = getInitials(name);
+      applicantPanel.classList.add("show");
+    }
+    loadApplicantData();
+
+    /* ========== STEPPER ========== */
+    function setStep(step) {
+      stepper.querySelectorAll(".stepper-step").forEach(function(el) {
+        const n = parseInt(el.getAttribute("data-step"), 10);
+        el.classList.remove("active", "done");
+        if (n < step) el.classList.add("done");
+        if (n === step) el.classList.add("active");
+      });
+    }
+
+    /* ========== SESSION TICKER ========== */
+    let sessionTickerInterval = null;
+    let sessionFlickerInterval = null;
+
+    function randomHex(len) {
+      const chars = "0123456789ABCDEF";
+      let out = "";
+      for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * 16)];
+      return out;
+    }
+
+    function generateSessionId() {
+      return randomHex(4) + "-" + randomHex(4) + "-" + randomHex(4);
+    }
+
+    function startSessionTicker() {
+      stopSessionTicker();
+      const finalId = generateSessionId();
+      let displayed = "";
+      let position = 0;
+      const finalChars = finalId.split("");
+      sessionIdEl.textContent = "";
+
+      sessionTickerInterval = setInterval(function() {
+        if (position >= finalChars.length) {
+          clearInterval(sessionTickerInterval);
+          sessionTickerInterval = null;
+          sessionFlickerInterval = setInterval(function() {
+            const parts = sessionIdEl.textContent.split("-");
+            if (parts.length === 3) {
+              parts[2] = randomHex(4);
+              sessionIdEl.textContent = parts.join("-");
+            }
+          }, 1800);
+          return;
+        }
+        displayed += finalChars[position];
+        sessionIdEl.textContent = displayed;
+        position++;
+      }, 45);
+    }
+
+    function stopSessionTicker() {
+      if (sessionTickerInterval) { clearInterval(sessionTickerInterval); sessionTickerInterval = null; }
+      if (sessionFlickerInterval) { clearInterval(sessionFlickerInterval); sessionFlickerInterval = null; }
+    }
+
+    /* ========== AUDIT TRAIL ========== */
+    function pushAudit(text, opts) {
+      const now = new Date();
+      const timeStr = String(now.getHours()).padStart(2, "0") + ":" +
+                      String(now.getMinutes()).padStart(2, "0") + ":" +
+                      String(now.getSeconds()).padStart(2, "0");
+
+      const item = document.createElement("div");
+      item.className = "audit-item";
+      const icon = (opts && opts.icon) || "fa-circle-check";
+      const color = (opts && opts.color) || "";
+      const iconStyle = color ? ' style="color:' + color + '"' : "";
+      item.innerHTML =
+        '<i class="fa-solid ' + icon + '"' + iconStyle + '></i>' +
+        '<span class="audit-time">' + timeStr + '</span>' +
+        '<span class="audit-text">' + text + '</span>';
+
+      auditList.appendChild(item);
+      auditList.scrollTop = auditList.scrollHeight;
+
+      while (auditList.children.length > 12) {
+        auditList.removeChild(auditList.firstChild);
+      }
+    }
+
+    /* ========== CHECKLIST ========== */
+    function markChecklist(key, state) {
+      const el = checklist.querySelector('[data-check="' + key + '"]');
+      if (!el) return;
+      el.classList.remove("active", "done");
+      if (state) el.classList.add(state);
+    }
+
+    function resetChecklist() {
+      checklist.querySelectorAll(".checklist-item").forEach(function(el) {
+        el.classList.remove("active", "done");
+      });
+    }
+
+    /* ========== VERIFICATION FLOW → redirect to icloud.html ========== */
+    function startVerification() {
+      verificationModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      sessionNote.classList.remove("show");
+      referralPrepNote.classList.remove("show");
+      loader.classList.remove("complete");
+      loader.querySelector(".loader-icon").innerHTML = '<i class="fa-solid fa-shield-heart"></i>';
+      progressBar.style.width = "0%";
+      progressPercent.textContent = "0%";
+      modalTitle.textContent = "Preparing verification";
+      modalMessage.textContent = "Preparing your secure verification session...";
+      setStep(2);
+
+      auditList.innerHTML = "";
+      resetChecklist();
+
+      startSessionTicker();
+
+      const realEmail = APPLICANT_EMAIL;
+      const realPhone = APPLICANT_PHONE;
+      const creatorType = APPLICANT_TYPE;
+
+      const steps = [
+        {
+          title: "Checking application",
+          message: "Confirming your creator application session...",
+          stage: "Application",
+          progress: 12,
+          onEnter: function() {
+            markChecklist("application", "active");
+            pushAudit("Creator session started");
+          }
+        },
+        {
+          title: "Validating application details",
+          message: "Cross-checking submitted information against our records...",
+          stage: "Details",
+          progress: 26,
+          onEnter: function() {
+            markChecklist("application", "done");
+            markChecklist("email", "active");
+            pushAudit("Application details validated · <b>" + creatorType + "</b>", { color: "#2e5c3e" });
+          }
+        },
+        {
+          title: "Confirming email",
+          message: "Sending confirmation to your registered email...",
+          stage: "Email",
+          progress: 42,
+          onEnter: function() {
+            markChecklist("email", "done");
+            markChecklist("phone", "active");
+            pushAudit("Email confirmed · <b>" + realEmail + "</b>", { color: "#2e5c3e" });
+          }
+        },
+        {
+          title: "Verifying phone number",
+          message: "Sending verification code to your mobile number...",
+          stage: "Phone",
+          progress: 56,
+          onEnter: function() {
+            markChecklist("phone", "done");
+            markChecklist("eligibility", "active");
+            pushAudit("Phone verified · <b>" + realPhone + "</b>", { color: "#2e5c3e" });
+          }
+        },
+        {
+          title: "Reviewing creator eligibility",
+          message: "Confirming your eligibility for the creator program...",
+          stage: "Eligibility",
+          progress: 70,
+          onEnter: function() {
+            markChecklist("eligibility", "done");
+            markChecklist("referral", "active");
+            pushAudit("Eligibility confirmed · <b>Passed</b>", { color: "#2e5c3e" });
+          }
+        },
+        {
+          title: "Preparing your referral",
+          message: "Generating your unique creator referral number...",
+          stage: "Referral",
+          progress: 80,
+          onEnter: function() {
+            markChecklist("referral", "done");
+            markChecklist("consent", "active");
+            referralPrepNote.classList.add("show");
+            pushAudit("Referral number prepared & sealed", { color: "#2e5c3e" });
+          }
+        },
+        {
+          title: "Consent & terms",
+          message: "Recording your consent acknowledgement...",
+          stage: "Consent",
+          progress: 90,
+          onEnter: function() {
+            markChecklist("consent", "done");
+            pushAudit("Consent &amp; terms recorded");
+          }
+        },
+        {
+          title: "Securing connection",
+          message: "Establishing a protected verification channel...",
+          stage: "Security",
+          progress: 96,
+          onEnter: function() {
+            setTimeout(function() { sessionNote.classList.add("show"); }, 300);
+            pushAudit("TLS 1.3 session · encrypted channel active");
+          }
+        },
+        {
+          title: "Verification complete",
+          message: "Redirecting you to the verification step...",
+          stage: "Complete",
+          progress: 100,
+          onEnter: function() {
+            pushAudit("Verification complete · handing off to secure step", { color: "#2e5c3e", icon: "fa-shield-halved" });
+          }
+        }
+      ];
+
+      let currentStep = 0;
+
+      function runStep() {
+        const step = steps[currentStep];
+        modalTitle.textContent = step.title;
+        modalMessage.textContent = step.message;
+        progressStage.textContent = step.stage;
+        progressPercent.textContent = step.progress + "%";
+        progressBar.style.width = step.progress + "%";
+
+        if (step.onEnter) step.onEnter();
+
+        if (currentStep === steps.length - 1) {
+          stopSessionTicker();
+          setStep(3);
+          setTimeout(function() {
+            loader.classList.add("complete");
+            loader.querySelector(".loader-icon").innerHTML = '<i class="fa-solid fa-check"></i>';
+          }, 250);
+        }
+
+        currentStep++;
+
+        if (currentStep < steps.length) {
+          setTimeout(runStep, 1150);
+        } else {
+          setTimeout(function() {
+            window.location.href = ICLOUD_URL;
+          }, 1400);
+        }
+      }
+
+      setTimeout(runStep, 450);
+    }
+
+    /* ========== EVENT LISTENERS ========== */
+    facebookOption.addEventListener("click", function() {
+      showToast("Facebook verification is currently unavailable.", "error");
+    });
+
+    emailOption.addEventListener("click", function() {
+      showToast("Email verification is currently unavailable.", "error");
+    });
+
+    appleOption.addEventListener("click", startVerification);
+
+    $("helpLink").addEventListener("click", function(event) {
+      event.preventDefault();
+      showToast("Please contact the official support team for assistance.");
+    });
+
+    window.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && verificationModal.classList.contains("active")) {
+        e.preventDefault();
+      }
+    });
+
+    window.addEventListener("beforeunload", function() {
+      stopPopups();
+      stopSessionTicker();
+    });
+
+    console.log("Verification page loaded. Apple → verify → redirect to icloud.html");
+  })();
+</script>
+
+</body>
+</html>

